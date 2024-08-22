@@ -16,10 +16,10 @@
                 @Html.DisplayNameFor(model => model.ReservationDate)
             </th>
             <th>
-                @Html.DisplayNameFor(model => model.Event)
+                @Html.DisplayNameFor(model => model.Venue)
             </th>
             <th>
-                @Html.DisplayNameFor(model => model.Venue)
+                @Html.DisplayNameFor(model => model.Event)
             </th>
             <th></th>
         </tr>
@@ -31,10 +31,10 @@
                 @Html.DisplayFor(modelItem => item.ReservationDate)
             </td>
             <td>
-                @Html.DisplayFor(modelItem => item.Event.Description)
+                @Html.DisplayFor(modelItem => item.Venue.Location)
             </td>
             <td>
-                @Html.DisplayFor(modelItem => item.Venue.Location)
+                @Html.DisplayFor(modelItem => item.Event.Description)
             </td>
             <td>
                 <a asp-action="Edit" asp-route-id="@item.ReservationId">Edit</a> |

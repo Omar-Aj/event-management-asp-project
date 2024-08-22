@@ -7,7 +7,6 @@ using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
 using event_management_asp_project.Data;
 using event_management_asp_project.Models;
-using System.Security.Claims;
 
 namespace event_management_asp_project.Controllers
 {
@@ -23,7 +22,8 @@ namespace event_management_asp_project.Controllers
         // GET: Events
         public async Task<IActionResult> Index()
         {
-            return View(await _context.tblEvents.ToListAsync());
+            var applicationDbContext = _context.tblEvents.Include(e => e.User);
+            return View(await applicationDbContext.ToListAsync());
         }
 
         // GET: Events/Details/5
@@ -35,6 +35,7 @@ namespace event_management_asp_project.Controllers
             }
 
             var @event = await _context.tblEvents
+                .Include(e => e.User)
                 .FirstOrDefaultAsync(m => m.EventId == id);
             if (@event == null)
             {
@@ -47,7 +48,8 @@ namespace event_management_asp_project.Controllers
         // GET: Events/Create
         public IActionResult Create()
         {
-            return View(new Event { UserId = User.FindFirstValue(ClaimTypes.NameIdentifier)! });
+            ViewData["UserId"] = new SelectList(_context.Set<User>(), "Id", "Id");
+            return View();
         }
 
         // POST: Events/Create
@@ -55,7 +57,7 @@ namespace event_management_asp_project.Controllers
         // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Create([Bind("EventId,Title,StartTime,EndTime,Description,UserId")] Event @event)
+        public async Task<IActionResult> Create([Bind("EventId,Title,DurationInHours,Description,UserId")] Event @event)
         {
             if (ModelState.IsValid)
             {
@@ -63,6 +65,7 @@ namespace event_management_asp_project.Controllers
                 await _context.SaveChangesAsync();
                 return RedirectToAction(nameof(Index));
             }
+            ViewData["UserId"] = new SelectList(_context.Set<User>(), "Id", "Id", @event.UserId);
             return View(@event);
         }
 
@@ -79,6 +82,7 @@ namespace event_management_asp_project.Controllers
             {
                 return NotFound();
             }
+            ViewData["UserId"] = new SelectList(_context.Set<User>(), "Id", "Id", @event.UserId);
             return View(@event);
         }
 
@@ -87,7 +91,7 @@ namespace event_management_asp_project.Controllers
         // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Edit(int id, [Bind("EventId,Title,StartTime,EndTime,Description,UserId")] Event @event)
+        public async Task<IActionResult> Edit(int id, [Bind("EventId,Title,DurationInHours,Description,UserId")] Event @event)
         {
             if (id != @event.EventId)
             {
@@ -114,6 +118,7 @@ namespace event_management_asp_project.Controllers
                 }
                 return RedirectToAction(nameof(Index));
             }
+            ViewData["UserId"] = new SelectList(_context.Set<User>(), "Id", "Id", @event.UserId);
             return View(@event);
         }
 
@@ -126,6 +131,7 @@ namespace event_management_asp_project.Controllers
             }
 
             var @event = await _context.tblEvents
+                .Include(e => e.User)
                 .FirstOrDefaultAsync(m => m.EventId == id);
             if (@event == null)
             {
