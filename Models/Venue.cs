@@ -16,10 +16,10 @@ namespace event_management_asp_project.Models
         [Required]
         public string Location { get; set; } = string.Empty;
 
-        public ServiceEnum Services { get; set; } = ServiceEnum.Other;
+        public ServiceEnum Service { get; set; } = ServiceEnum.Other;
 
         [Required]
-        [Range(5, 100)]
+        [Range(5, 1000)]
         public int Capacity { get; set; }
 
         //Navigation
