@@ -29,9 +29,8 @@ namespace event_management_asp_project.Controllers
         [HttpPost]
         public async Task<IActionResult> FindEvent(EventViewModel model)
         {
-            string? title = (model.Title is null || model.Title == string.Empty) ? "" : model.Title;
+            string? title = String.IsNullOrEmpty(model.Title) ? "" : model.Title;
             model.Events = await _context.tblEvents
-                            .Include(e => e.User)
                             .Where(
                              e => e.Title.Contains(title)
                              ).ToListAsync();
