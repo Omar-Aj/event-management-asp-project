@@ -7,6 +7,7 @@ using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
 using event_management_asp_project.Data;
 using event_management_asp_project.Models;
+using System.Security.Claims;
 using event_management_asp_project.Models.ViewModels;
 
 namespace event_management_asp_project.Controllers
@@ -37,10 +38,23 @@ namespace event_management_asp_project.Controllers
             return View(model);
         }
         // GET: Events
-        public async Task<IActionResult> Index()
+        public async Task<IActionResult> Index(string sortOrder)
         {
-            var applicationDbContext = _context.tblEvents.Include(e => e.User);
-            return View(await applicationDbContext.ToListAsync());
+            ViewData["NameSortParm"] = String.IsNullOrEmpty(sortOrder) ? "title_desc" : "";
+            ViewData["DurationSortParm"] = sortOrder == "Duration" ? "duration_desc" : "Duration";
+
+            var applicationDbContext = _context.tblEvents;
+            switch (sortOrder)
+            {
+                case "title_desc":
+                    return View(await applicationDbContext.OrderByDescending(e => e.Title).ToListAsync());
+                case "Duration":
+                    return View(await applicationDbContext.OrderBy(e => e.DurationInHours).ToListAsync());
+                case "duration_desc":
+                    return View(await applicationDbContext.OrderByDescending(e => e.DurationInHours).ToListAsync());
+                default:
+                    return View(await applicationDbContext.OrderBy(e => e.Title).ToListAsync());
+            }
         }
 
         // GET: Events/Details/5
@@ -65,8 +79,7 @@ namespace event_management_asp_project.Controllers
         // GET: Events/Create
         public IActionResult Create()
         {
-            ViewData["UserId"] = new SelectList(_context.Set<User>(), "Id", "Id");
-            return View();
+            return View(new Event { UserId = User.FindFirstValue(ClaimTypes.NameIdentifier)! });
         }
 
         // POST: Events/Create
