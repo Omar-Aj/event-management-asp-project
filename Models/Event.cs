@@ -23,10 +23,11 @@ namespace event_management_asp_project.Models
 
         [Required]
         [MaxLength(200)]
+        [DataType(DataType.MultilineText)]
         public string Description { get; set; } = string.Empty;
 
         //Foreign Key
-        public int UserId { get; set; }
+        public string UserId { get; set; } = string.Empty;
 
         //Navigation
         public IEnumerable<Reservation>? Reservations { get; set; }
