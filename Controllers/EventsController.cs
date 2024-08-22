@@ -7,6 +7,7 @@ using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
 using event_management_asp_project.Data;
 using event_management_asp_project.Models;
+using event_management_asp_project.Models.ViewModels;
 
 namespace event_management_asp_project.Controllers
 {
@@ -19,6 +20,22 @@ namespace event_management_asp_project.Controllers
             _context = context;
         }
 
+        [HttpGet]
+        public IActionResult FindEvent()
+        {
+            return View(new EventViewModel());
+        }
+        [HttpPost]
+        public async Task<IActionResult> FindEvent(EventViewModel model)
+        {
+            string? title = (model.Title is null || model.Title == string.Empty) ? "" : model.Title;
+            model.Events = await _context.tblEvents
+                            .Include(e => e.User)
+                            .Where(
+                             e => e.Title.Contains(title)
+                             ).ToListAsync();
+            return View(model);
+        }
         // GET: Events
         public async Task<IActionResult> Index()
         {
