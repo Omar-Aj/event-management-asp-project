@@ -54,7 +54,7 @@ namespace event_management_asp_project.Controllers
         // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Create([Bind("VenueId,Name,Location,Services,Capacity")] Venue venue)
+        public async Task<IActionResult> Create([Bind("VenueId,Name,Location,Service,Capacity")] Venue venue)
         {
             if (ModelState.IsValid)
             {
@@ -86,7 +86,7 @@ namespace event_management_asp_project.Controllers
         // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Edit(int id, [Bind("VenueId,Name,Location,Services,Capacity")] Venue venue)
+        public async Task<IActionResult> Edit(int id, [Bind("VenueId,Name,Location,Service,Capacity")] Venue venue)
         {
             if (id != venue.VenueId)
             {
