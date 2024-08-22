@@ -11,6 +11,7 @@ namespace event_management_asp_project.Models
         [Required]
         [MaxLength(30)]
         [Column(TypeName = "nvarchar(30)")]
+        [Display(Name = "Venues")]
         public string Name { get; set; } = string.Empty;
 
         [Required]

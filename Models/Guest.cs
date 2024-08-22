@@ -7,6 +7,8 @@ namespace event_management_asp_project.Models
         [Key]
         public int GuestId { get; set; }
 
+        public int EventId { get; set; }
+
         [Required]
         [MaxLength(50)]
         public string Name { get; set; } = string.Empty;
@@ -23,5 +25,9 @@ namespace event_management_asp_project.Models
         [Required]
         [Phone]
         public string Phone { get; set; } = string.Empty;
+
+        // Navigation
+        public Event? Event { get; set; }
+
     }
 }

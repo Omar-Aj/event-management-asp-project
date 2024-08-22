@@ -1,4 +1,4 @@
-﻿@model event_management_asp_project.Models.Event
+﻿@model Event
 
 @{
     ViewData["Title"] = "Delete";
@@ -12,10 +12,11 @@
     <hr />
     <dl class="row">
         <dt class = "col-sm-2">
-            @Html.DisplayNameFor(model => model.Title)
+            <label asp-for="@(Model.Title)"></label>
         </dt>
         <dd class = "col-sm-10">
-            @Html.DisplayFor(model => model.Title)
+            <input asp-for="@(Model.Title)">
+
         </dd>
         <dt class = "col-sm-2">
             @Html.DisplayNameFor(model => model.DurationInHours)
