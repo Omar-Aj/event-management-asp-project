@@ -21,39 +21,50 @@ namespace event_management_asp_project.Controllers
             _context = context;
         }
 
-        [HttpGet]
         public IActionResult FindEvent()
         {
             return View(new EventViewModel());
         }
+
         [HttpPost]
         public async Task<IActionResult> FindEvent(EventViewModel model)
         {
-            string? title = String.IsNullOrEmpty(model.Title) ? "" : model.Title;
+            var title = String.IsNullOrEmpty(model.Title) ? "" : model.Title;
+
             model.Events = await _context.tblEvents
-                            .Where(
-                             e => e.Title.Contains(title)
-                             ).ToListAsync();
+                .Include(e => e.Reservations)!
+                .ThenInclude(r => r.Venue)
+                .Where(e => e.Title.ToUpper().Contains(title.ToUpper()))
+                .ToListAsync();
+
             return View(model);
         }
+
         // GET: Events
         public async Task<IActionResult> Index(string sortOrder)
         {
             ViewData["NameSortParm"] = String.IsNullOrEmpty(sortOrder) ? "title_desc" : "";
             ViewData["DurationSortParm"] = sortOrder == "Duration" ? "duration_desc" : "Duration";
 
-            var applicationDbContext = _context.tblEvents;
+            var events = from e in _context.tblEvents select e;
+
             switch (sortOrder)
             {
                 case "title_desc":
-                    return View(await applicationDbContext.OrderByDescending(e => e.Title).ToListAsync());
+                    events = events.OrderByDescending(e => e.Title);
+                    break;
                 case "Duration":
-                    return View(await applicationDbContext.OrderBy(e => e.DurationInHours).ToListAsync());
+                    events = events.OrderBy(e => e.DurationInHours);
+                    break;
                 case "duration_desc":
-                    return View(await applicationDbContext.OrderByDescending(e => e.DurationInHours).ToListAsync());
+                    events = events.OrderByDescending(e => e.DurationInHours);
+                    break;
                 default:
-                    return View(await applicationDbContext.OrderBy(e => e.Title).ToListAsync());
+                    events = events.OrderBy(e => e.Title);
+                    break;
             }
+
+            return View(await events.ToListAsync());
         }
 
         // GET: Events/Details/5
