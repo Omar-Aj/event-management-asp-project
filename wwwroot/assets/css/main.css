@@ -87,16 +87,28 @@ h6 {
   font-family: var(--heading-font);
 }
 
+.custom-btn-log{
+    padding-top:12px;
+    padding-bottom:12px;
+    color: var(--default-color);
+    background-color: var(--accent-color);
+}
+
+    .custom-btn-log:hover {
+        color: var(--default-color);
+        background-color: #ae1833;
+    }
+
 /* Pulsating Play Button
 ------------------------------*/
 .pulsating-play-btn {
-  width: 94px;
-  height: 94px;
-  background: radial-gradient(var(--accent-color) 50%, color-mix(in srgb, var(--accent-color), transparent 75%) 52%);
-  border-radius: 50%;
-  display: block;
-  position: relative;
-  overflow: hidden;
+    width: 94px;
+    height: 94px;
+    background: radial-gradient(var(--accent-color) 50%, color-mix(in srgb, var(--accent-color), transparent 75%) 52%);
+    border-radius: 50%;
+    display: block;
+    position: relative;
+    overflow: hidden;
 }
 
 .pulsating-play-btn:before {
