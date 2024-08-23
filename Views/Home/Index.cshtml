@@ -1,8 +1,179 @@
-﻿@{
+﻿@model IEnumerable<Event>
+@{
     ViewData["Title"] = "Home Page";
 }
 
-<div class="text-center">
-    <h1 class="display-4">Welcome</h1>
-    <p>Learn about <a href="https://learn.microsoft.com/aspnet/core">building Web apps with ASP.NET Core</a>.</p>
+<!-- Hero Section -->
+<section id="hero" class="hero section dark-background">
+
+    <img src="~/assets/img/hero-bg.jpg" alt="" data-aos="fade-in" class="">
+
+    <div class="container d-flex flex-column align-items-center text-center mt-auto">
+        <h2 data-aos="fade-up" data-aos-delay="100" class="">DISCOVER MORE WITH <br><span>TheEvent</span></h2>
+        <p data-aos="fade-up" data-aos-delay="200">Your Personal Event Management System</p>
+        <div data-aos="fade-up" data-aos-delay="300" class="">
+            <a href="#events" class="pulsating-play-btn mt-3"></a>
+        </div>
+    </div>
+
+    <div class="about-info mt-auto position-relative">
+
+        <div class="container position-relative" data-aos="fade-up">
+            <div class="row">
+                <div class="col-lg-6">
+                    <h2>About The Event</h2>
+                    <p>
+                        TheEvent is a comprehensive web application designed
+                        to streamline the event planning process. It offers a user-friendly
+                        interface for creating, managing, and promoting events of all sizes.
+                    </p>
+                </div>
+                <div class="col-lg-3">
+                    <h3>Where</h3>
+                    <p>Applied Science Private University<br />Amman, Jordan</p>
+                </div>
+                <div class="col-lg-3">
+                    <h3>Features</h3>
+                    <p>Efficient<br />User-Friendly<br />Organized</p>
+                </div>
+            </div>
+        </div>
+    </div>
+
+</section><!-- /Hero Section -->
+<!-- Latest Event Section -->
+<div id="events" class="hotels section">
+
+    <div class="container section-title" data-aos="fade-up">
+        <h2>Latest Events</h2>
+        <p>Find your next adventure among our diverse lineup of events.</p>
+    </div>
+
+    @* <p>
+    <a asp-action="Create">Create New</a>
+    </p> *@
+
+    <div class="container">
+        <div class="row gy-4">
+            @foreach (var item in Model)
+            {
+                <!-- Card Item -->
+
+                <div class="col-lg-4 col-md-6" data-aos="fade-up" data-aos-delay="100">
+                    <div class="card h-100">
+                        <div class="card-img">
+                            <img src="assets/img/hotels-1.jpg" alt="" class="img-fluid">
+                        </div>
+                        <div class="d-flex justify-content-between">
+                            <h3><a asp-controller="Events" asp-action="Details" asp-route-id="@item.EventId" class="stretched-link">@item.Title</a></h3>
+                            <p>@item.DurationInHours hours</p>
+                        </div>
+                        @if (item.Description.Length <= 100)
+                        {
+                            <p>@item.Description</p>
+                        }
+                        else
+                        {
+                            <p>@item.Description.Substring(0, 97)...</p>
+                        }
+                    </div>
+                </div>
+
+                <!-- End Card Item -->
+            }
+        </div>
+    </div>
 </div>
+<!-- /Latest Event Section -->
+<!-- Sponsors Section -->
+<section id="sponsors" class="sponsors section light-background">
+
+    <!-- Section Title -->
+    <div class="container section-title" data-aos="fade-up">
+        <h2>Sponsors</h2>
+        <p>Our latest sponsors who help make our mission possible.</p>
+    </div><!-- End Section Title -->
+
+    <div class="container" data-aos="fade-up" data-aos-delay="100">
+
+        <div class="row g-0 clients-wrap">
+
+            <div class="col-xl-3 col-md-4 client-logo">
+                <img src="assets/img/clients/client-1.png" class="img-fluid" alt="">
+            </div><!-- End Client Item -->
+
+            <div class="col-xl-3 col-md-4 client-logo">
+                <img src="assets/img/clients/client-2.png" class="img-fluid" alt="">
+            </div><!-- End Client Item -->
+
+            <div class="col-xl-3 col-md-4 client-logo">
+                <img src="assets/img/clients/client-3.png" class="img-fluid" alt="">
+            </div><!-- End Client Item -->
+
+            <div class="col-xl-3 col-md-4 client-logo">
+                <img src="assets/img/clients/client-4.png" class="img-fluid" alt="">
+            </div><!-- End Client Item -->
+
+            <div class="col-xl-3 col-md-4 client-logo">
+                <img src="assets/img/clients/client-5.png" class="img-fluid" alt="">
+            </div><!-- End Client Item -->
+
+            <div class="col-xl-3 col-md-4 client-logo">
+                <img src="assets/img/clients/client-6.png" class="img-fluid" alt="">
+            </div><!-- End Client Item -->
+
+            <div class="col-xl-3 col-md-4 client-logo">
+                <img src="assets/img/clients/client-7.png" class="img-fluid" alt="">
+            </div><!-- End Client Item -->
+
+            <div class="col-xl-3 col-md-4 client-logo">
+                <img src="assets/img/clients/client-8.png" class="img-fluid" alt="">
+            </div><!-- End Client Item -->
+
+        </div>
+
+    </div>
+
+</section><!-- /Sponsors Section -->
+<!-- Contact Section -->
+<section id="contact" class="contact section">
+
+    <!-- Section Title -->
+    <div class="container section-title" data-aos="fade-up">
+        <h2>Contact</h2>
+        <p>Reach out to us for any information and questions.</p>
+    </div><!-- End Section Title -->
+
+    <div class="container" data-aos="fade-up" data-aos-delay="100">
+
+        <div class="row gy-4">
+
+            <div class="col-lg-6">
+                <div class="info-item d-flex flex-column justify-content-center align-items-center" data-aos="fade-up" data-aos-delay="200">
+                    <i class="bi bi-geo-alt"></i>
+                    <h3>Address</h3>
+                    <p>Shafa Badran Street, Amman, Jordan</p>
+                </div>
+            </div><!-- End Info Item -->
+
+            <div class="col-lg-3 col-md-6">
+                <div class="info-item d-flex flex-column justify-content-center align-items-center" data-aos="fade-up" data-aos-delay="300">
+                    <i class="bi bi-telephone"></i>
+                    <h3>Call Us</h3>
+                    <p>+962-6560​9999</p>
+                </div>
+            </div><!-- End Info Item -->
+
+            <div class="col-lg-3 col-md-6">
+                <div class="info-item d-flex flex-column justify-content-center align-items-center" data-aos="fade-up" data-aos-delay="400">
+                    <i class="bi bi-envelope"></i>
+                    <h3>Email Us</h3>
+                    <p>info@asu.edu.jo</p>
+                </div>
+            </div><!-- End Info Item -->
+
+        </div>
+
+    </div>
+
+</section><!-- /Contact Section -->
