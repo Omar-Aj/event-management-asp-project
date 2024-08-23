@@ -24,9 +24,9 @@ namespace event_management_asp_project.Controllers
 		}
 
 		[AllowAnonymous]
-		[Route("/")]
-		// GET: Events
-		public async Task<IActionResult> Index()
+        [Route("~/")]
+        // GET: Events
+        public async Task<IActionResult> Index()
 		{
 			var applicationDbContext = await _context.tblEvents.Include(x => x.Guests).ToListAsync();
 			return View(applicationDbContext);
@@ -34,6 +34,7 @@ namespace event_management_asp_project.Controllers
 
 		// GET: Events/Details/5
 		[AllowAnonymous]
+		[Route("~/[Controller]/[Action]/{id:int?}")]
         public async Task<IActionResult> Details(int? id)
 		{
 			if (id == null)
@@ -51,9 +52,16 @@ namespace event_management_asp_project.Controllers
 			return View(@event);
 		}
 
-		// GET: Events/Create
-		
-		public IActionResult Create()
+        public async Task<IActionResult> ManageEvent(int? id)
+		{
+            var @event = await _context.tblEvents.FirstOrDefaultAsync(m => m.EventId == id);
+            return View(@event);
+		}
+
+
+        // GET: Events/Create
+
+        public IActionResult Create()
 		{
 			return View(new Event { UserId = User.FindFirstValue(ClaimTypes.NameIdentifier)! });
 		}
