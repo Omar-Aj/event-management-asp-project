@@ -1,0 +1,93 @@
+﻿@model EventViewModel
+@using event_management_asp_project.Models.ViewModels
+
+@{
+    ViewData["Title"] = "Find Event";
+}
+
+<h1>@ViewData["Title"]</h1>
+
+<h4>Find By:</h4>
+
+<hr />
+
+<form asp-action="FindEvent">
+    <div>
+        <label asp-for="Title" class="form-label"></label>
+        <input asp-for="Title" class="form-control mb-2" />
+        <span asp-validation-for="Title" class="text-danger"></span>
+    </div>
+    <input type="submit" value="Search" class="btn btn-primary"/>
+</form>
+
+<div>
+    <table class="table hover">
+        <thead>
+            <tr>
+                <th>
+                    <label asp-for="@Model.Events!.FirstOrDefault()!.Title"></label>
+                </th>
+                <th>
+                    <label asp-for="@Model.Events!.FirstOrDefault()!.DurationInHours"></label>
+                </th>
+                <th>
+                    <label asp-for="@Model.Events!.FirstOrDefault()!.Reservations"></label>
+                </th>
+                <th>
+                    <label asp-for="@Model.Events!.FirstOrDefault()!.Description"></label>
+                </th>
+            </tr>
+        </thead>
+        <tbody>
+            @if (String.IsNullOrEmpty(Model.Title))
+            {
+                <tr>
+                    <th colspan="3">
+                        Search events by title above.
+                    </th>
+                </tr>
+            }
+            else if (Model.Events is null || Model.Events!.Count().Equals(0))
+            {
+                <tr>
+                    <th colspan="3">
+                        No Events found!
+                    </th>
+                </tr>
+            }
+            else
+            {
+                @foreach (var e in Model.Events!)
+                {
+                    <tr>
+                        <td>
+                            @e.Title
+                        </td>
+                        <td>
+                            @e.DurationInHours
+                        </td>
+                        <td>
+                            @foreach (var r in e.Reservations!)
+                            {
+                                <span>@(r.Venue!.Name), </span>
+                            }
+                        </td>
+                        <td>
+                            @e.Description
+                        </td>
+                    </tr>
+                }
+            }
+        </tbody>
+    </table>
+</div>
+
+<div>
+    <a asp-action="Index">Back to List</a>
+</div>
+
+@section Scripts {
+    @{
+        await Html.RenderPartialAsync("_ValidationScriptsPartial");
+    }
+}

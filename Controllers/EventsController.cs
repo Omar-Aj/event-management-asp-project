@@ -7,6 +7,8 @@ using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
 using event_management_asp_project.Data;
 using event_management_asp_project.Models;
+using System.Security.Claims;
+using event_management_asp_project.Models.ViewModels;
 
 namespace event_management_asp_project.Controllers
 {
@@ -19,11 +21,50 @@ namespace event_management_asp_project.Controllers
             _context = context;
         }
 
-        // GET: Events
-        public async Task<IActionResult> Index()
+        public IActionResult FindEvent()
         {
-            var applicationDbContext = _context.tblEvents.Include(e => e.User);
-            return View(await applicationDbContext.ToListAsync());
+            return View(new EventViewModel());
+        }
+
+        [HttpPost]
+        public async Task<IActionResult> FindEvent(EventViewModel model)
+        {
+            var title = String.IsNullOrEmpty(model.Title) ? "" : model.Title;
+
+            model.Events = await _context.tblEvents
+                .Include(e => e.Reservations)!
+                .ThenInclude(r => r.Venue)
+                .Where(e => e.Title.ToUpper().Contains(title.ToUpper()))
+                .ToListAsync();
+
+            return View(model);
+        }
+
+        // GET: Events
+        public async Task<IActionResult> Index(string sortOrder)
+        {
+            ViewData["NameSortParm"] = String.IsNullOrEmpty(sortOrder) ? "title_desc" : "";
+            ViewData["DurationSortParm"] = sortOrder == "Duration" ? "duration_desc" : "Duration";
+
+            var events = from e in _context.tblEvents select e;
+
+            switch (sortOrder)
+            {
+                case "title_desc":
+                    events = events.OrderByDescending(e => e.Title);
+                    break;
+                case "Duration":
+                    events = events.OrderBy(e => e.DurationInHours);
+                    break;
+                case "duration_desc":
+                    events = events.OrderByDescending(e => e.DurationInHours);
+                    break;
+                default:
+                    events = events.OrderBy(e => e.Title);
+                    break;
+            }
+
+            return View(await events.ToListAsync());
         }
 
         // GET: Events/Details/5
@@ -48,8 +89,7 @@ namespace event_management_asp_project.Controllers
         // GET: Events/Create
         public IActionResult Create()
         {
-            ViewData["UserId"] = new SelectList(_context.Set<User>(), "Id", "Id");
-            return View();
+            return View(new Event { UserId = User.FindFirstValue(ClaimTypes.NameIdentifier)! });
         }
 
         // POST: Events/Create
