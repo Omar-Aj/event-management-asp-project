@@ -15,6 +15,7 @@ namespace event_management_asp_project.Models
 
         [Required]
         [Display(Name = "Duration In Hours")]
+        [Range(1, 240)]
         public int DurationInHours { get; set; }
 
         [Required]
@@ -27,6 +28,7 @@ namespace event_management_asp_project.Models
 
         //Navigation
         public IEnumerable<Reservation>? Reservations { get; set; }
+        public IEnumerable<Guest>? Guests { get; set; }
         public User? User { get; set; }
     }
 }
