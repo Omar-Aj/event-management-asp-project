@@ -1,0 +1,59 @@
+﻿@model event_management_asp_project.Models.Event
+
+@{
+	ViewData["Title"] = "Manage Event";
+}
+
+<h1>Manage Event</h1>
+
+<div>
+	<h4>Event</h4>
+	<hr />
+	<div class="container">
+		<div class="row">
+			<div class="col">
+				Reservation
+			</div>
+			<div class="col">
+				Guests
+			</div>
+		</div>
+
+		<div class="row">
+			<div class="col">
+				@if (Model.Reservations is null || Model.Reservations.Count() == 0)
+				{
+					<p>No reservations found</p>
+				}
+				else
+				@foreach (var item in Model.Reservations!)
+				{
+					@item.Venue!.Name
+					<br>
+					@item.Venue.Capacity
+					<hr />
+				}
+			</div>
+			<div class="col">
+				@if (Model.Guests is null || Model.Guests.Count() == 0)
+				{
+					<p>No guests invited</p>
+				}
+				else
+				@foreach (var item in Model.Guests!)
+				{
+					@item.Name
+					<br>
+					@item.Email
+					<hr />
+				}
+			</div>
+
+		</div>
+	</div>
+
+</div>
+<div>
+	<a asp-action="Edit" asp-route-id="@Model?.EventId">Edit</a> |
+	<a asp-action="myEvents">Back to List</a>
+</div>
