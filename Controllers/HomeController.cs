@@ -1,21 +1,25 @@
+using event_management_asp_project.Data;
 using event_management_asp_project.Models;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.EntityFrameworkCore;
 using System.Diagnostics;
 
 namespace event_management_asp_project.Controllers
 {
     public class HomeController : Controller
     {
-        private readonly ILogger<HomeController> _logger;
+        private readonly ApplicationDbContext _context;
 
-        public HomeController(ILogger<HomeController> logger)
+        public HomeController(ApplicationDbContext context)
         {
-            _logger = logger;
+            _context = context;
         }
 
-        public IActionResult Index()
+        public async Task<IActionResult> Index()
         {
-            return View();
+            //idea: bring first 3 events by popularity
+            var events =await _context.tblEvents.Include(e => e.Reservations).OrderByDescending(e => e.Reservations!.Max(r => r.ReservationDate)).Take(3).ToListAsync();
+            return View(events);
         }
 
         public IActionResult Privacy()

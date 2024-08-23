@@ -320,8 +320,26 @@ h6 {
     padding-right: 0;
   }
 
+    .custom_btn {
+        color: var(--nav-color);
+        background-color: transparent;
+        font-size: 15px;
+        padding: 0 2px;
+        margin: 2px 0;
+        border: 0;
+        font-family: var(--nav-font);
+        font-weight: 600;
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        white-space: nowrap;
+        transition: 0.3s;
+        position: relative;
+    }
+
   .navmenu a,
-  .navmenu a:focus {
+  .navmenu a:focus,
+  .navmenu .custom_btn:focus {
     color: var(--nav-color);
     font-size: 15px;
     padding: 0 2px;
@@ -343,26 +361,30 @@ h6 {
     transition: 0.3s;
   }
 
-  .navmenu>ul>li>a:before {
-    content: "";
-    position: absolute;
-    height: 2px;
-    bottom: -6px;
-    left: 0;
-    background-color: var(--accent-color);
-    visibility: hidden;
-    width: 0px;
-    transition: all 0.3s ease-in-out 0s;
-  }
+    .navmenu > ul > li > a:before,
+    .navmenu > ul > li > form > .custom_btn:before {
+        content: "";
+        position: absolute;
+        height: 2px;
+        bottom: -6px;
+        left: 0;
+        background-color: var(--accent-color);
+        visibility: hidden;
+        width: 0px;
+        transition: all 0.3s ease-in-out 0s;
+    }
 
-  .navmenu a:hover:before,
-  .navmenu li:hover>a:before,
-  .navmenu .active:before {
-    visibility: visible;
-    width: 100%;
-  }
+    .navmenu a:hover:before,
+    .navmenu .custom_btn:hover:before,
+    .navmenu li:hover > a:before,
+    .navmenu li:hover > form > .custom_btn:before,
+    .navmenu .active:before {
+        visibility: visible;
+        width: 100%;
+    }
 
   .navmenu li:hover>a,
+  .navmenu li:hover > form > .custom_btn,
   .navmenu .active,
   .navmenu .active:focus {
     color: var(--nav-hover-color);
@@ -493,6 +515,7 @@ h6 {
   }
 
   .navmenu a:hover,
+  .navmenu .custom_btn:hover,
   .navmenu .active,
   .navmenu .active:focus {
     color: var(--nav-dropdown-hover-color);
