@@ -1,0 +1,21 @@
+﻿@model Reservation
+
+<div>
+    <label asp-for="ReservationDate"></label>
+    <span>: @(Model.ReservationDate)</span>
+</div>
+<div>
+    <label asp-for="Venue!.Name"></label>
+    <span>: @(Model.Venue!.Name)</span>
+</div>
+<div>
+    <label asp-for="Venue!.Location"></label>
+    <span>: @(Model.Venue!.Location)</span>
+</div>
+
+<input type="hidden" asp-for="ReservationId" />
+
+@* Must be used
+@* <div class="form-group">
+    <input type="submit" value="Create" class="btn btn-primary" />
+</div> *@

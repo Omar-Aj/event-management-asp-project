@@ -65,16 +65,16 @@
         <div class="container" data-aos="fade-up" data-aos-delay="100">
             <div class="row gy-4 mt-1 align-items-start justify-content-center">
                 <!-- Button trigger modal -->
-                <button type="button" class="btn py-1 px-3 custom-btn-create" data-bs-toggle="modal" data-bs-target="#exampleModal">
+                <button type="button" class="btn py-1 px-3 custom-btn-create" data-bs-toggle="modal" data-bs-target="#createReservationModal">
                     Add new reservation
                 </button>
                 <!-- Modal -->
-                <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                <div class="modal fade" id="createReservationModal" tabindex="-1" aria-labelledby="createReservationModalLabel" aria-hidden="true">
                     <div class="modal-dialog">
                         <div class="modal-content">
                             <form asp-controller="Reservations" asp-action="Create">
                                 <div class="modal-header">
-                                    <h1 class="modal-title fs-5" id="exampleModalLabel">Add new reservation</h1>
+                                    <h1 class="modal-title fs-5" id="createReservationModalLabel">Add new reservation</h1>
                                     <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                                 </div>
                                 <div class="modal-body">
@@ -128,7 +128,38 @@
                                     <td>@item.Venue.Location</td>
                                     <td>@item.ReservationDate</td>
                                     <td>@item.Venue.Service</td>
-                                    <td class="d-flex justify-content-between"><span>@item.Venue.Capacity</span> <a asp-controller="Reservations" asp-action="Delete" asp-route-id="@item.ReservationId" class="btn btn-danger"><i class="bi bi-trash text-light"></i></a></td>
+                                    <td class="d-flex justify-content-between">
+                                        <span>@item.Venue.Capacity</span>
+                                        <!-- Button trigger modal -->
+                                        <button type="button" class="btn btn-danger" data-bs-toggle="modal" data-bs-target="@("#deleteReservationModal" + item.ReservationId)" data-url="@Url.Action($"Reservations/Delete/{item.ReservationId}")">
+                                            <i class="bi bi-trash text-light"></i>
+                                        </button>
+                                        <!-- Modal -->
+                                        <div class="modal fade" id="@("deleteReservationModal" + item.ReservationId)" tabindex="-1" aria-labelledby="@(item.ReservationId)Label" aria-hidden="true">
+                                            <div class="modal-dialog">
+                                                <div class="modal-content">
+                                                    <form asp-controller="Reservations" asp-action="Delete">
+                                                        <div class="modal-header">
+                                                            <h1 class="modal-title fs-5" id="@(item.ReservationId)Label">Delete a reservation</h1>
+                                                            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                                                        </div>
+                                                        <div class="modal-body">
+                                                            <p>Are you sure you want to delete @item.</p>
+                                                            <input asp-for="@item.ReservationId" />
+                                                            @* <partial name="PartialViews/_ReservationDeleteFormFields" model="item"/> *@
+                                                        </div>
+                                                        <div class="modal-footer">
+                                                            <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                                                            <button type="submit" class="btn btn-danger">Yes</button>
+                                                        </div>
+                                                    </form>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        @* <a asp-controller="Reservations" asp-action="Delete" asp-route-id="@item.ReservationId" class="btn btn-danger">
+                                            <i class="bi bi-trash text-light"></i>
+                                        </a> *@
+                                    </td>
                                 </tr>
                             }
                         }
