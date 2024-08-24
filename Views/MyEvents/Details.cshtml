@@ -213,9 +213,10 @@
                 <table class="table">
                     <thead>
                         <tr>
-                            <th>Name</th>
-                            <th>Email</th>
-                            <th>Actions</th>
+                            <th><label asp-for="@(Model.Guests.FirstOrDefault().Name)"></label></th>
+                            <th><label asp-for="@(Model.Guests.FirstOrDefault().Email)"></label></th>
+                            <th><label asp-for="@(Model.Guests.FirstOrDefault().Phone)"></label></th>
+                            <th>Delete</th>
                         </tr>
                     </thead>
                     <tbody>
@@ -234,6 +235,7 @@
                                 <tr>
                                     <td>@item.Name</td>
                                     <td>@item.Email</td>
+                                    <td>@item.Phone</td>
                                     <td></td>
                                 </tr>
                             }
@@ -243,25 +245,13 @@
             </div>
             <div class="row gy-4 mt-1 align-items-start justify-content-center">
                 <div class="col-lg-8">
+                    @(ViewBag.GuestModel = null) 
                     <!--Connnect form with the action-->
-                    <form action="forms/contact.php" method="post" class="email-form-custom" data-aos="fade-up" data-aos-delay="400">
+                    <form asp-action="Create" asp-controller="Guests" class="email-form-custom" data-aos="fade-up" data-aos-delay="400">
                         <div class="row gy-4">
 
-                            <div class="col-md-12">
-                                <input type="text" name="name" class="form-control" placeholder="Your Name" required="">
-                            </div>
+                            <partial name="PartialViews\_MyEventsRegisterEvent" model="@ViewBag.MyGuestModel">
 
-                            <div class="col-md-12">
-                                <input type="email" class="form-control" name="email" placeholder="Your Email" required="">
-                            </div>
-
-                            <div class="col-md-12">
-                                <input type="text" class="form-control" name="subject" placeholder="Confirm Your Email" required="">
-                            </div>
-
-                            <div class="col-md-12">
-                                <input type="text" class="form-control" name="subject" placeholder="Your Phone Number" required="">
-                            </div>
 
                             <div class="col-md-12 text-center">
                                 <button type="submit">Add Guest</button>
@@ -276,3 +266,8 @@
     <!-- /Guest Resgistration Section -->
 </main>
 <partial name="../Shared/PartialViews/_CopyrightFooterSection" />
+@section Scripts {
+    @{
+        await Html.RenderPartialAsync("_ValidationScriptsPartial");
+    }
+}

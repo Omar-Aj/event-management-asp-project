@@ -87,6 +87,11 @@ namespace event_management_asp_project.Controllers
                 return RedirectToAction("Details", "MyEvents", new { id = id });
             }
 
+            if (ViewBag.GuestModel is null || !ViewBag.GuestModel.ModelState.IsValid)
+                ViewBag.GuestModel = new Guest { EventId = id.Value};
+
+            ViewBag.MyGuestModel = null;
+
             return View(@event);
         }
 
