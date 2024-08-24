@@ -1,4 +1,4 @@
-﻿@model event_management_asp_project.Models.Event
+﻿@model Event
 
 @{
     ViewData["Title"] = "Manage Event";
@@ -17,7 +17,7 @@
             </nav>
         </div>
     </div>
-    <!-- End Page Title -->
+    <!-- /Page Title -->
     <!-- Events Section -->
     <section id="events" class="events section">
         <div class="container" data-aos="fade-up" data-aos-delay="100">
@@ -140,7 +140,6 @@
                             <th>
                                 <label asp-for="@Model.Reservations!.FirstOrDefault()!.ReservationDate"></label>
                             </th>
-
                         </tr>
                     </thead>
                     <tbody>
@@ -173,7 +172,7 @@
                                                 <div class="modal-content">
                                                     <form asp-controller="Reservations" asp-action="Delete">
                                                         <div class="modal-header">
-                                                            <h1 class="modal-title fs-5" id="@(item.ReservationId)">Delete a reservation</h1>
+                                                            <h1 class="modal-title fs-5" id="@(item.ReservationId)">Delete reservation</h1>
                                                             <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                                                         </div>
                                                         <div class="modal-body">
@@ -181,16 +180,13 @@
                                                             <partial name="PartialViews/_ReservationDeleteFormFields" model="item" />
                                                         </div>
                                                         <div class="modal-footer">
-                                                            <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-                                                            <button type="submit" class="btn btn-danger">Yes</button>
+                                                            <button type="button" class="btn custom-btn-close" data-bs-dismiss="modal">Close</button>
+                                                            <button type="submit" class="btn btn-danger">Delete</button>
                                                         </div>
                                                     </form>
                                                 </div>
                                             </div>
                                         </div>
-                                        @* <a asp-controller="Reservations" asp-action="Delete" asp-route-id="@item.ReservationId" class="btn btn-danger">
-                                <i class="bi bi-trash text-light"></i>
-                                </a> *@
                                     </td>
                                 </tr>
                             }
