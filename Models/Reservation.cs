@@ -8,7 +8,7 @@ namespace event_management_asp_project.Models
 
         [Required]
         [Display(Name ="Reservation Date")]
-        public DateTime ReservationDate { get; set; }
+        public DateTime ReservationDate { get; set; } = DateTime.Now;
 
         //Foreign Keys
         public int VenueId { get; set; }

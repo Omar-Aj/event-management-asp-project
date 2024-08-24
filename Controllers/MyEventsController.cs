@@ -37,6 +37,7 @@ namespace event_management_asp_project.Controllers
             }
 
             var @event = await _context.tblEvents
+                .Include(e => e.Reservations)
                 .FirstOrDefaultAsync(m => m.EventId == id);
 
             if (@event == null)
@@ -48,6 +49,8 @@ namespace event_management_asp_project.Controllers
             {
                 return Unauthorized();
             }
+
+            ViewData["Venues"] = new SelectList(await _context.tblVenues.ToListAsync(), "VenueId", "Name");
 
             return View(@event);
         }
@@ -74,7 +77,7 @@ namespace event_management_asp_project.Controllers
             {
                 _context.Add(@event);
                 await _context.SaveChangesAsync();
-                return RedirectToAction(nameof(Index));
+                return RedirectToAction(nameof(Details), new { id = @event.EventId });
             }
 
             return View(@event);

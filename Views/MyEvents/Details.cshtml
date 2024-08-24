@@ -31,7 +31,7 @@
                             <h2>@Model.Title</h2>
                             <a asp-action="Edit" asp-route-id="@Model.EventId" class="btn py-1 px-3 custom-btn-create d-flex align-items-center"><i class="bi bi-pen p-0 pe-2"></i><span>Edit</span></a>
                         </div>
-                        
+
                         <div class="social">
                             <a href=""><i class="bi bi-twitter"></i></a>
                             <a href=""><i class="bi bi-facebook"></i></a>
@@ -64,6 +64,31 @@
 
         <div class="container" data-aos="fade-up" data-aos-delay="100">
             <div class="row gy-4 mt-1 align-items-start justify-content-center">
+                <!-- Button trigger modal -->
+                <button type="button" class="btn py-1 px-3 custom-btn-create" data-bs-toggle="modal" data-bs-target="#exampleModal">
+                    Add new reservation
+                </button>
+                <!-- Modal -->
+                <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                    <div class="modal-dialog">
+                        <div class="modal-content">
+                            <form asp-controller="Reservations" asp-action="Create">
+                                <div class="modal-header">
+                                    <h1 class="modal-title fs-5" id="exampleModalLabel">Add new reservation</h1>
+                                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                                </div>
+                                <div class="modal-body">
+                                    <partial name="PartialViews/_ReservationCreateFormFields" model="new Reservation { EventId = Model.EventId }" />
+                                </div>
+                                <div class="modal-footer">
+                                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                                    <button type="submit" class="btn btn-primary">Add</button>
+                                </div>
+                            </form>
+                        </div>
+                    </div>
+                </div>
+
                 <table class="table">
                     <thead>
                         <tr>
@@ -86,7 +111,7 @@
                         </tr>
                     </thead>
                     <tbody>
-                        @if (Model.Reservations is null || Model.Reservations.Count() == 0)
+                        @if (Model.Reservations is null || Model.Reservations.Count()! == 0)
                         {
                             <tr>
                                 <td colspan="5">
@@ -103,7 +128,7 @@
                                     <td>@item.Venue.Location</td>
                                     <td>@item.ReservationDate</td>
                                     <td>@item.Venue.Service</td>
-                                    <td class="d-flex justify-content-between"><span>@item.Venue.Capacity</span> <a asp-action="Delete" asp-route-id="" class="btn btn-danger"><i class="bi bi-trash text-light"></i></a></td>
+                                    <td class="d-flex justify-content-between"><span>@item.Venue.Capacity</span> <a asp-controller="Reservations" asp-action="Delete" asp-route-id="@item.ReservationId" class="btn btn-danger"><i class="bi bi-trash text-light"></i></a></td>
                                 </tr>
                             }
                         }
