@@ -7,6 +7,7 @@ namespace event_management_asp_project.Models
         public int ReservationId { get; set; }
 
         [Required]
+        [Display(Name ="Reservation Date")]
         public DateTime ReservationDate { get; set; }
 
         //Foreign Keys
