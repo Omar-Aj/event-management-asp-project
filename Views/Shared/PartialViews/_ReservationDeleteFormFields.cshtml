@@ -13,7 +13,16 @@
     <span>: @(Model.Venue!.Location)</span>
 </div>
 
-<input type="hidden" asp-for="ReservationId" />
+<div>
+    <label asp-for="ReservationId"></label>
+    <input asp-for="ReservationId"/>
+</div>
+
+<div hidden>
+    <label asp-for="EventId"></label>
+    <input asp-for="EventId" />
+</div>
+
 
 @* Must be used
 @* <div class="form-group">

@@ -150,16 +150,16 @@ namespace event_management_asp_project.Controllers
         // POST: Reservations/Delete/5
         [HttpPost, ActionName("Delete")]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> DeleteConfirmed(int id)
+        public async Task<IActionResult> DeleteConfirmed([Bind("ReservationId,ReservationDate,VenueId,EventId")] Reservation model)
         {
-            var reservation = await _context.tblReservations.FindAsync(id);
-            if (reservation != null)
+            int? eventId = model.EventId;
+            if (ModelState.IsValid)
             {
-                _context.tblReservations.Remove(reservation);
+                _context.tblReservations.Remove(model);
             }
 
             await _context.SaveChangesAsync();
-            return RedirectToAction(nameof(Index));
+            return RedirectToAction("Details", "MyEvents", new { id = eventId });
         }
 
         private bool ReservationExists(int id)

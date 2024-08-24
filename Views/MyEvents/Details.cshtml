@@ -131,22 +131,21 @@
                                     <td class="d-flex justify-content-between">
                                         <span>@item.Venue.Capacity</span>
                                         <!-- Button trigger modal -->
-                                        <button type="button" class="btn btn-danger" data-bs-toggle="modal" data-bs-target="@("#deleteReservationModal" + item.ReservationId)" data-url="@Url.Action($"Reservations/Delete/{item.ReservationId}")">
+                                        <button type="button" class="btn btn-danger" data-bs-toggle="modal" data-bs-target="@("#deleteReservationModal" + item.ReservationId)">
                                             <i class="bi bi-trash text-light"></i>
                                         </button>
                                         <!-- Modal -->
-                                        <div class="modal fade" id="@("deleteReservationModal" + item.ReservationId)" tabindex="-1" aria-labelledby="@(item.ReservationId)Label" aria-hidden="true">
+                                        <div class="modal fade" id="@("deleteReservationModal" + item.ReservationId)" tabindex="-1" aria-labelledby="@("deleteReservationModal" + @item.ReservationId)" aria-hidden="true">
                                             <div class="modal-dialog">
                                                 <div class="modal-content">
                                                     <form asp-controller="Reservations" asp-action="Delete">
                                                         <div class="modal-header">
-                                                            <h1 class="modal-title fs-5" id="@(item.ReservationId)Label">Delete a reservation</h1>
+                                                            <h1 class="modal-title fs-5" id="@(item.ReservationId)">Delete a reservation</h1>
                                                             <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                                                         </div>
                                                         <div class="modal-body">
-                                                            <p>Are you sure you want to delete @item.</p>
-                                                            <input asp-for="@item.ReservationId" />
-                                                            @* <partial name="PartialViews/_ReservationDeleteFormFields" model="item"/> *@
+                                                            <p>Are you sure you want to delete this reservation</p>
+                                                            <partial name="PartialViews/_ReservationDeleteFormFields" model="item"/>
                                                         </div>
                                                         <div class="modal-footer">
                                                             <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>

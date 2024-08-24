@@ -36,6 +36,8 @@ namespace event_management_asp_project.Controllers
                 return NotFound();
             }
 
+            ViewData["BackTo"] = id;
+
             var @event = await _context.tblEvents
                 .Include(e => e.Reservations)!
                 .ThenInclude(r => r.Venue)
