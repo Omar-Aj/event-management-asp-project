@@ -4,45 +4,77 @@
     ViewData["Title"] = "Edit";
 }
 
-<h1>Edit</h1>
-
-<h4>Event</h4>
-<hr />
-<div class="row">
-    <div class="col-md-4">
-        <form asp-action="Edit">
-            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
-            <input type="hidden" asp-for="EventId" />
-            <div class="form-group">
-                <label asp-for="Title" class="control-label"></label>
-                <input asp-for="Title" class="form-control" />
-                <span asp-validation-for="Title" class="text-danger"></span>
-            </div>
-            <div class="form-group">
-                <label asp-for="DurationInHours" class="control-label"></label>
-                <input asp-for="DurationInHours" class="form-control" />
-                <span asp-validation-for="DurationInHours" class="text-danger"></span>
-            </div>
-            <div class="form-group">
-                <label asp-for="Description" class="control-label"></label>
-                <textarea asp-for="Description" class="form-control"></textarea>
-                <span asp-validation-for="Description" class="text-danger"></span>
-            </div>
-            <div class="form-group">
-                <label asp-for="UserId" class="control-label"></label>
-                <input asp-for="UserId" class ="form-control"></input>
-                <span asp-validation-for="UserId" class="text-danger"></span>
-            </div>
-            <div class="form-group">
-                <input type="submit" value="Save" class="btn btn-primary" />
-            </div>
-        </form>
+<main class="main">
+    <!-- Page Title -->
+    <div class="page-title" data-aos="fade" style="background-image: url(https://images.unsplash.com/photo-1454165804606-c3d57bc86b40?q=80&w=2070&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D);">
+        <div class="container position-relative">
+            <h1>@ViewData["Title"]</h1>
+            <p>Manage all your events</p>
+            <nav class="breadcrumbs">
+                <ol>
+                    <li><a asp-controller="Home" asp-action="Index">Home</a></li>
+                    <li class="current">My Events</li>
+                </ol>
+            </nav>
+        </div>
     </div>
-</div>
+    <!-- End Page Title -->
+    <!-- Create Form Section -->
+    <section id="contact" class="contact section">
+        <div class="container section-title pb-0" data-aos="fade-up">
+            <h2>Create Your Event Now</h2>
+        </div>
 
-<div>
-    <a asp-action="Index">Back to List</a>
-</div>
+        <div class="container" data-aos="fade-up" data-aos-delay="100">
+            <div class="row gy-4 mt-1 align-items-start justify-content-center">
+                <div class="col-lg-8">
+                    <!--Connnect form with the action-->
+                    <form asp-action="Edit" class="email-form-custom" data-aos="fade-up" data-aos-delay="400">
+                        <div class="row gy-4">
+
+                            <div class="col-md-12">
+                                <label asp-for="Title" class="control-label"></label>
+                                <input asp-for="Title" class="form-control" />
+                                <span asp-validation-for="Title" class="text-danger"></span>
+                            </div>
+
+                            <div class="col-md-12">
+                                <label asp-for="DurationInHours" class="control-label"></label>
+                                <input asp-for="DurationInHours" class="form-control" type="text" />
+                                <span asp-validation-for="DurationInHours" class="text-danger"></span>
+                            </div>
+
+                            <div class="col-md-12">
+                                <label asp-for="Description" class="control-label"></label>
+                                <textarea asp-for="Description" class="form-control"></textarea>
+                                <span asp-validation-for="Description" class="text-danger"></span>
+                            </div>
+
+                            <div class="col-md-12" hidden>
+                                <label asp-for="UserId" class="control-label"></label>
+                                <input asp-for="UserId" class="form-control" />
+                                <span asp-validation-for="UserId" class="text-danger"></span>
+                            </div>
+                            <div class="col-md-12" hidden>
+                                <label asp-for="EventId" class="control-label"></label>
+                                <input asp-for="EventId" class="form-control" />
+                                <span asp-validation-for="EventId" class="text-danger"></span>
+                            </div>
+
+                            <div class="col-md-12 d-flex gap-4 align-items-center justify-content-center">
+                                <a asp-action="Details" asp-route-id="@Model.EventId">Cancel</a>
+                                <button type="submit">Save</button>
+                            </div>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </section>
+    <!-- /Create Form Section -->
+</main>
+
+<partial name="../Shared/PartialViews/_CopyrightFooterSection" />
 
 @section Scripts {
     @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}

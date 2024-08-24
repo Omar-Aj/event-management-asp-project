@@ -140,7 +140,7 @@ namespace event_management_asp_project.Controllers
                     }
                     throw;
                 }
-                return RedirectToAction(nameof(Index));
+                return RedirectToAction(nameof(Details), new {id = @event.EventId});
             }
 
             return View(@event);
