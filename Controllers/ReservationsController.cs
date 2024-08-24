@@ -65,7 +65,7 @@ namespace event_management_asp_project.Controllers
             {
                 _context.Add(reservation);
                 await _context.SaveChangesAsync();
-                return RedirectToAction(nameof(Index));
+                return RedirectToAction("Details", "MyEvents", new {id = reservation.EventId});
             }
             ViewData["EventId"] = new SelectList(_context.tblEvents, "EventId", "Description", reservation.EventId);
             ViewData["VenueId"] = new SelectList(_context.tblVenues, "VenueId", "Location", reservation.VenueId);
