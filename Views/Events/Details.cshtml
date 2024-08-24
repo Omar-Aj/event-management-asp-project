@@ -4,59 +4,59 @@
 	ViewData["Title"] = "Event Details";
 }
 <main class="main">
-	<!-- Page Title -->
-	<div class="page-title" data-aos="fade" style="background-image: url(https://images.unsplash.com/photo-1524234599372-a5bd0194758d?q=80&w=2070&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D);">
-		<div class="container position-relative">
-			<h1>@ViewData["Title"]</h1>
-			<p>Dive deep into the details, explore the event Schedule, Venue, and More...</p>
-			<nav class="breadcrumbs">
-				<ol>
-					<li><a asp-action="Index">Home</a></li>
-					<li class="current">@ViewData["Title"]</li>
-				</ol>
-			</nav>
-		</div>
-	</div>
-	<!-- End Page Title -->
-	<!-- Events Section -->
-	<section id="events" class="events section">
-		<div class="container" data-aos="fade-up" data-aos-delay="100">
-			<div class="row">
-				<div class="col-md-6">
-					<img src="~/assets/img/hotels-1.jpg" alt="Speaker" class="img-fluid">
-				</div>
-				<div class="col-md-6">
-					<div class="details">
-						<h2>@Model.Title</h2>
-						<div class="social">
-							<a href=""><i class="bi bi-twitter"></i></a>
-							<a href=""><i class="bi bi-facebook"></i></a>
-							<a href=""><i class="bi bi-instagram"></i></a>
-							<a href=""><i class="bi bi-linkedin"></i></a>
-						</div>
-						<p><strong>Duration:</strong> @Model.DurationInHours hours</p>
-						<p><strong>Description:</strong><br />@Model.Description</p>
-						<p>
-							<strong>Date & Location:</strong><br />
-							<!--List of venue will go here with the reservation date-->
-							<ul>
-								<li>Venue 1</li>
-								<li>Venue 2</li>
-								<li>Venue 3</li>
-							</ul>
-						</p>
-					</div>
-				</div>
-			</div>
-		</div>
-	</section>
-	<!-- /Events Section -->
-	<!-- Resgistration Section -->
-	<section id="contact" class="contact section">
-		<div class="container section-title" data-aos="fade-up">
-			<h2>Join Now</h2>
-			<p>Time is running out, register now before it's too late!!</p>
-		</div>
+    <!-- Page Title -->
+    <div class="page-title" data-aos="fade" style="background-image: url(https://images.unsplash.com/photo-1524234599372-a5bd0194758d?q=80&w=2070&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D);">
+        <div class="container position-relative">
+            <h1>@ViewData["Title"]</h1>
+            <p>Dive deep into the details, explore the event Schedule, Venue, and More...</p>
+            <nav class="breadcrumbs">
+                <ol>
+                    <li><a asp-action="Index">Events</a></li>
+                    <li class="current">@ViewData["Title"]</li>
+                </ol>
+            </nav>
+        </div>
+    </div>
+    <!-- End Page Title -->
+    <!-- Events Section -->
+    <section id="events" class="events section">
+        <div class="container" data-aos="fade-up" data-aos-delay="100">
+            <div class="row">
+                <div class="col-md-6">
+                    <img src="~/assets/img/hotels-1.jpg" alt="Speaker" class="img-fluid">
+                </div>
+                <div class="col-md-6">
+                    <div class="details">
+                        <h2>@Model.Title</h2>
+                        <div class="social">
+                            <a href=""><i class="bi bi-twitter"></i></a>
+                            <a href=""><i class="bi bi-facebook"></i></a>
+                            <a href=""><i class="bi bi-instagram"></i></a>
+                            <a href=""><i class="bi bi-linkedin"></i></a>
+                        </div>
+                        <p><strong>Duration:</strong> @Model.DurationInHours hours</p>
+                        <p><strong>Description:</strong><br />@Model.Description</p>
+                        <p>
+                            <strong>Date & Location:</strong><br />
+                            <!--List of venue will go here with the reservation date-->
+                            <ul>
+                                <li>Venue 1</li>
+                                <li>Venue 2</li>
+                                <li>Venue 3</li>
+                            </ul>
+                        </p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+    <!-- /Events Section -->
+    <!-- Resgistration Section -->
+    <section id="contact" class="contact section">
+        <div class="container section-title" data-aos="fade-up">
+            <h2>Join Now</h2>
+            <p>Time is running out, register now before it's too late!!</p>
+        </div>
 
 		<div class="container" data-aos="fade-up" data-aos-delay="100">
 			<div class="row gy-4 mt-1 align-items-start">

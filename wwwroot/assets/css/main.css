@@ -520,6 +520,7 @@ h6 {
   }
 
   .navmenu a,
+  .custom_btn,
   .navmenu a:focus {
     color: var(--nav-dropdown-color);
     padding: 10px 20px;

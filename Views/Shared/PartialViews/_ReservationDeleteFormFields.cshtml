@@ -1,28 +1,33 @@
 ﻿@model Reservation
 
-<div>
-    <label asp-for="ReservationDate"></label>
-    <span>: @(Model.ReservationDate)</span>
+<div class="mb-1">
+    <label asp-for="Venue!.Name" class="form-label"></label>
+    <input asp-for="Venue!.Name" class="form-control" disabled  />
 </div>
-<div>
-    <label asp-for="Venue!.Name"></label>
-    <span>: @(Model.Venue!.Name)</span>
+<div class="mb-1">
+    <label asp-for="Venue!.Location" class="form-label"></label>
+    <input asp-for="Venue!.Location" class="form-control" disabled />
 </div>
-<div>
-    <label asp-for="Venue!.Location"></label>
-    <span>: @(Model.Venue!.Location)</span>
+<div class="mb-1">
+    <label asp-for="Venue!.Service" class="form-label"></label>
+    <input asp-for="Venue!.Service" class="form-control" disabled />
 </div>
-
+<div class="mb-1">
+    <label asp-for="Venue!.Capacity" class="form-label"></label>
+    <input asp-for="Venue!.Capacity" class="form-control" disabled />
+</div>
+<div class="mb-1">
+    <label asp-for="ReservationDate" class="form-label"></label>
+    <input asp-for="ReservationDate" class="form-control" disabled />
+</div>
 <div hidden>
-    <label asp-for="ReservationId"></label>
-    <input asp-for="ReservationId"/>
+    <label asp-for="ReservationId" class="form-label"></label>
+    <input asp-for="ReservationId" class="form-control" />
 </div>
-
 <div hidden>
-    <label asp-for="EventId"></label>
-    <input asp-for="EventId" />
+    <label asp-for="EventId" class="form-label"></label>
+    <input asp-for="EventId" class="form-control" />
 </div>
-
 
 @* Must be used
 @* <div class="form-group">

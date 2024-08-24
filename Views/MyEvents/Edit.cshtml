@@ -1,4 +1,4 @@
-﻿@model event_management_asp_project.Models.Event
+﻿@model Event
 
 @{
     ViewData["Title"] = "Edit";
@@ -12,8 +12,8 @@
             <p>Manage all your events</p>
             <nav class="breadcrumbs">
                 <ol>
-                    <li><a asp-action="Index">Home</a></li>
-                    <li class="current">My Events</li>
+                    <li><a asp-action="Details" asp-route-id="@Model.EventId">@Model.Title</a></li>
+                    <li class="current">@ViewData["Title"]</li>
                 </ol>
             </nav>
         </div>
@@ -22,7 +22,7 @@
     <!-- Create Form Section -->
     <section id="contact" class="contact section">
         <div class="container section-title pb-0" data-aos="fade-up">
-            <h2>Create Your Event Now</h2>
+            <h2>Edit Your Event Now</h2>
         </div>
 
         <div class="container" data-aos="fade-up" data-aos-delay="100">
