@@ -106,17 +106,38 @@ h6 {
         color: white;
         background-color: #0e1b4d;
     }
-    /* Pulsating Play Button
-------------------------------*/
-    .pulsating-play-btn {
-        width: 94px;
-        height: 94px;
-        background: radial-gradient(var(--accent-color) 50%, color-mix(in srgb, var(--accent-color), transparent 75%) 52%);
-        border-radius: 50%;
-        display: block;
-        position: relative;
-        overflow: hidden;
+
+.custom-btn-close {
+    font-size: 16px;
+    border: 1px solid grey;
+}
+
+    .custom-btn-close:hover {
+        color: white;
+        background-color: grey;
     }
+
+.custom-btn-add {
+    color: white;
+    background-color: #0e1b4d;
+}
+
+.custom-btn-add:hover {
+    color: white;
+    background-color: #0e1b4d;
+}
+
+/* Pulsating Play Button
+------------------------------*/
+.pulsating-play-btn {
+    width: 94px;
+    height: 94px;
+    background: radial-gradient(var(--accent-color) 50%, color-mix(in srgb, var(--accent-color), transparent 75%) 52%);
+    border-radius: 50%;
+    display: block;
+    position: relative;
+    overflow: hidden;
+}
 
 .pulsating-play-btn:before {
   content: "";
