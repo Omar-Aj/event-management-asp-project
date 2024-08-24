@@ -6,7 +6,7 @@
 
 <main class="main">
     <!-- Page Title -->
-    <div class="page-title" data-aos="fade" style="background-image: url(assets/img/page-title-bg.webp);">
+    <div class="page-title" data-aos="fade" style="background-image: url(https://images.unsplash.com/photo-1556761175-5973dc0f32e7?q=80&w=1932&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D);">
         <div class="container position-relative">
             <h1>My Events</h1>
             <p></p>
@@ -19,64 +19,50 @@
         </div>
     </div>
     <!-- End Page Title -->
+    <!-- My Event Section -->
+    <div id="events" class="hotels section">
+
+        <div class="container">
+            <div class="d-flex mb-5">
+                <a asp-action="Create" class="btn btn-lg py-1 px-3 custom-btn-create"><i class="bi bi-plus fs-4 p-0 pe-2"></i> Create New Event</a>
+            </div>
+            <div class="row gy-4">
+                @foreach (var item in Model)
+                {
+                    <!-- Card Item -->
+
+                    <div class="col-lg-3 col-md-6" data-aos="fade-up" data-aos-delay="100">
+                        <div class="card h-100" style="position: relative;">
+                            <div style="position: absolute; right: 8px; top: 10px; z-index: 1000">
+                                <a asp-action="Delete" asp-route-id="@item.EventId" class="btn btn-danger"><i class="bi bi-trash text-light"></i></a>
+                            </div>
+
+                            <div class="card-img">
+                                <img src="assets/img/hotels-1.jpg" alt="" class="img-fluid">
+                            </div>
+
+                            <div class="d-flex justify-content-between">
+                                <h3><a asp-action="Details" asp-route-id="@item.EventId" class="stretched-link">@item.Title</a></h3>
+                                <p>@item.DurationInHours hours</p>
+                            </div>
+
+                            @if (item.Description.Length <= 100)
+                            {
+                                <p>@item.Description</p>
+                            }
+                            else
+                            {
+                                <p>@item.Description.Substring(0, 97)...</p>
+                            }
+                        </div>
+                    </div>
+
+                    <!-- End Card Item -->
+                }
+            </div>
+        </div>
+    </div>
+    <!-- /My Event Section -->
 </main>
-
-<h1>MyEvents</h1>
-
-<p>
-    <a asp-action="Create">Create New</a>
-</p>
-<table class="table">
-    <thead>
-        <tr>
-            <th>
-                <label asp-for="@(Model.FirstOrDefault()!.Title)"></label>
-            </th>
-            <th>
-                <label asp-for="@(Model.FirstOrDefault()!.DurationInHours)"></label>
-            </th>
-            <th>
-                <label asp-for="@(Model.FirstOrDefault()!.Description)"></label>
-            </th>
-            <th>
-                <label asp-for="@(Model.FirstOrDefault()!.Reservations!.FirstOrDefault()!.Venue!.Name)"></label>
-            </th>
-            <th></th>
-        </tr>
-    </thead>
-    <tbody>
-        @foreach (var item in Model)
-        {
-            <tr>
-                <td>
-                    @item.Title
-                </td>
-                <td>
-                    @item.DurationInHours
-                </td>
-                <td>
-                    @item.Description
-                </td>
-                <td>
-                    @if (item.Reservations is null || item.Reservations.Count() == 0)
-                    {
-                        <span class="text-danger">No Reservations</span>
-                    }
-                    else
-                        @foreach (var reservation in item.Reservations)
-                        {
-                            @reservation.Venue!.Name <span>-</span> @reservation.ReservationDate
-                        }
-                </td>
-
-                <td>
-                    <a asp-action="Edit" asp-route-id="@item.EventId">Edit</a> |
-                    <a asp-action="Details" asp-route-id="@item.EventId">Details</a> |
-                    <a asp-action="Delete" asp-route-id="@item.EventId">Delete</a>
-                </td>
-            </tr>
-        }
-    </tbody>
-</table>
 
 <partial name="../Shared/PartialViews/_CopyrightFooterSection" />
