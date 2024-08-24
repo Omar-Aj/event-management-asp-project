@@ -12,8 +12,8 @@
             <p>Manage all your events</p>
             <nav class="breadcrumbs">
                 <ol>
-                    <li><a asp-action="Index">Home</a></li>
-                    <li class="current">My Events</li>
+                    <li><a asp-action="Details" asp-route-id="@Model.EventId">@Model.Title</a></li>
+                    <li class="current">@ViewData["Title"]</li>
                 </ol>
             </nav>
         </div>
