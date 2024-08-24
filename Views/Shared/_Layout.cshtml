@@ -43,7 +43,7 @@
     <header id="header" class="header d-flex align-items-center fixed-top">
         <div class="container-fluid container-xl position-relative d-flex align-items-center">
 
-            <a class="logo d-flex align-items-center me-auto" asp-area="" asp-controller="Events" asp-action="Index"><h1 class="sitename">TheEvent</h1></a>
+            <a class="logo d-flex align-items-center me-auto" asp-area="" asp-controller="Home" asp-action="Index"><h1 class="sitename">TheEvent</h1></a>
 
             <nav id="navmenu" class="navmenu">
                 <ul>
@@ -54,7 +54,7 @@
                         <a asp-area="" asp-controller="Events" asp-action="Index">All Events</a>
                     </li>
                     <li>
-                        <a asp-area="" asp-controller="Home" asp-action="Privacy">About</a>
+                        <a asp-area="" asp-controller="Home" asp-action="About">About</a>
                     </li>
                     @if (SignInManager.IsSignedIn(User))
                     {
