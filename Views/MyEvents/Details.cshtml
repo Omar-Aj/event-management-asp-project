@@ -246,7 +246,7 @@
                     <form asp-action="Create" asp-controller="Guests" class="email-form-custom" data-aos="fade-up" data-aos-delay="400">
                         <div class="row gy-4">
 
-                            <partial name="PartialViews\_MyEventsRegisterEvent" model="@ViewBag.MyGuestModel">
+                            <partial name="PartialViews\_MyEventsRegisterEvent" model="new Guest {EventId = Model.EventId}">
 
 
                             <div class="col-md-12 text-center">

@@ -65,7 +65,7 @@
 					<!--Connnect form with the action-->
 					<form asp-action="Create" asp-controller="Guests" method="post" class="email-form-custom" data-aos="fade-up" data-aos-delay="400">
 						<div class="row gy-4">
-							<partial name="PartialViews\_MyGuestRegisterEvent" model="@ViewBag.GuestModel">
+							<partial name="PartialViews\_GuestRegisterEvent" model="new Guest{EventId = Model.EventId}">
 								<div class="col-md-12 text-center">
 									<button type="submit" name="name">Register Now</button>
 								</div>

@@ -61,10 +61,9 @@ namespace event_management_asp_project.Controllers
             {
                 _context.Add(guest);
                 await _context.SaveChangesAsync();
-				ViewBag.GuestModel = new Guest {EventId = guest.EventId };
 				return RedirectToAction("Details", "Events", new { id = guest.EventId });
 			}
-			ViewBag.GuestModel = guest;
+
 			return RedirectToAction("Details", "Events", new {id = guest.EventId});
         }
 

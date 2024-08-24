@@ -55,12 +55,6 @@ namespace event_management_asp_project.Controllers
             }
 
 
-            if (ViewBag.MyGuestModel is null || !ViewBag.MyGuestModel.ModelState.IsValid)
-                ViewBag.MyGuestModel = new Guest {EventId = id.Value};
-            
-            ViewBag.GuestModel = null;
-
-
             ViewData["Venues"] = new SelectList(await _context.tblVenues.ToListAsync(), "VenueId", "Name");
 
             return View(@event);
