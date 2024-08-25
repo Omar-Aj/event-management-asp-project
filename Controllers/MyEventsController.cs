@@ -24,7 +24,7 @@ namespace event_management_asp_project.Controllers
         // GET: MyEvents
         public async Task<IActionResult> Index()
         {
-            var model = await _context.tblEvents.Include(x => x.Reservations).Where(x => x.UserId.Equals(User.FindFirstValue(ClaimTypes.NameIdentifier))).ToListAsync();
+            var model = await _context.tblEvents.Include(x => x.Reservations).Include(x => x.Guests).Where(x => x.UserId.Equals(User.FindFirstValue(ClaimTypes.NameIdentifier))).ToListAsync();
             return View(model);
         }
 
