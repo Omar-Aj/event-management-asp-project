@@ -126,7 +126,9 @@ h6 {
     color: white;
     background-color: #0e1b4d;
 }
-
+.dropdown-menu .act-custom:active {
+    background-color: var(--accent-color);
+}
 /* Pulsating Play Button
 ------------------------------*/
 .pulsating-play-btn {
