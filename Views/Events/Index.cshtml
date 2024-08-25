@@ -27,18 +27,20 @@
             <p>Find your next adventure among our diverse lineup of events.</p>
         </div>
 
-        <div class="container mb-4">
+        <div class="container mb-4" data-aos="fade-up" data-aos-delay="100">
             <div class="dropdown">
-                <button class="btn custom-btn-add dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false">
-                    Sort by
-                </button>
+                <div class="d-flex justify-content-end">
+                    <button class="btn custom-btn-add dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false">
+                        Sort by
+                    </button>
+                </div>
                 <ul class="dropdown-menu">
-                    <li><a asp-action="Index" asp-route-sortOrder="" class="dropdown-item @(String.IsNullOrEmpty(ViewBag.CurrentSort) ? "active" : "")">Title (a - z)</a></li>
-                    <li><a asp-action="Index" asp-route-sortOrder="title_desc" class="dropdown-item @(ViewBag.CurrentSort == "title_desc" ? "active" : "")">Title (z - a)</a></li>
-                    <li><a asp-action="Index" asp-route-sortOrder="date_desc" class="dropdown-item @(ViewBag.CurrentSort == "date_desc" ? "active" : "")">Date (newest first)</a></li>
-                    <li><a asp-action="Index" asp-route-sortOrder="Date" class="dropdown-item @(ViewBag.CurrentSort == "Date" ? "active" : "")">Date (oldest first)</a></li>
-                    <li><a asp-action="Index" asp-route-sortOrder="Duration" class="dropdown-item @(ViewBag.CurrentSort == "Duration" ? "active" : "")">Duration (shortest first)</a></li>
-                    <li><a asp-action="Index" asp-route-sortOrder="duration_desc" class="dropdown-item @(ViewBag.CurrentSort == "duration_desc" ? "active" : "")">Duration (longest first)</a></li>
+                    <li><a asp-action="Index" asp-route-sortOrder="" class="dropdown-item act-custom @(ViewBag.CurrentSort == "" ? "bg-danger text-light" : "")">Title (a - z)</a></li>
+                    <li><a asp-action="Index" asp-route-sortOrder="title_desc" class="dropdown-item act-custom @(ViewBag.CurrentSort == "title_desc" ? "bg-danger text-light" : "")">Title (z - a)</a></li>
+                    <li><a asp-action="Index" asp-route-sortOrder="date_desc" class="dropdown-item act-custom @(ViewBag.CurrentSort == "date_desc" ? "bg-danger text-light" : "")">Date (newest first)</a></li>
+                    <li><a asp-action="Index" asp-route-sortOrder="Date" class="dropdown-item act-custom @(ViewBag.CurrentSort == "Date" ? "bg-danger text-light" : "")">Date (oldest first)</a></li>
+                    <li><a asp-action="Index" asp-route-sortOrder="Duration" class="dropdown-item act-custom @(ViewBag.CurrentSort == "Duration" ? "bg-danger text-light" : "")">Duration (shortest first)</a></li>
+                    <li><a asp-action="Index" asp-route-sortOrder="duration_desc" class="dropdown-item act-custom @(ViewBag.CurrentSort == "duration_desc" ? "bg-danger text-light" : "")">Duration (longest first)</a></li>
                 </ul>
             </div>
         </div>
