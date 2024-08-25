@@ -9,6 +9,8 @@ using event_management_asp_project.Data;
 using event_management_asp_project.Models;
 using System.Security.Claims;
 using Microsoft.AspNetCore.Authorization;
+using Microsoft.Data.SqlClient;
+using Microsoft.Extensions.Logging;
 
 namespace event_management_asp_project.Controllers
 {
@@ -22,10 +24,39 @@ namespace event_management_asp_project.Controllers
         }
 
         // GET: MyEvents
-        public async Task<IActionResult> Index()
+        public async Task<IActionResult> Index(string sortOrder)
         {
-            var model = await _context.tblEvents.Include(x => x.Reservations).Include(x => x.Guests).Where(x => x.UserId.Equals(User.FindFirstValue(ClaimTypes.NameIdentifier))).ToListAsync();
-            return View(model);
+            var model = _context.tblEvents
+                .Include(x => x.Reservations)
+                .Include(x => x.Guests)
+                .Where(x => x.UserId.Equals(User.FindFirstValue(ClaimTypes.NameIdentifier)));
+                
+            switch (sortOrder)
+            {
+                case "title_desc":
+                    model = model.OrderByDescending(e => e.Title);
+                    break;
+                case "Date":
+                    model = model.OrderBy(e => e.Reservations!
+                        .Min(r => r.ReservationDate)
+                    );
+                    break;
+                case "date_desc":
+                    model = model.OrderByDescending(e => e.Reservations!
+                        .Max(r => r.ReservationDate)
+                    );
+                    break;
+                case "Duration":
+                    model = model.OrderBy(e => e.DurationInHours);
+                    break;
+                case "duration_desc":
+                    model = model.OrderByDescending(e => e.DurationInHours);
+                    break;
+                default:
+                    model = model.OrderBy(e => e.Title);
+                    break;
+            }
+            return View(await model.ToListAsync());
         }
 
         // GET: MyEvents/Details/5

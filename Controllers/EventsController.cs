@@ -44,10 +44,6 @@ namespace event_management_asp_project.Controllers
         public async Task<IActionResult> Index(string sortOrder)
         {
             ViewData["CurrentSort"] = String.IsNullOrEmpty(sortOrder) ? "" : sortOrder;
-
-            var events2 = from e in _context.tblEvents
-                          select e;
-
             IQueryable<Event> events = _context.tblEvents
                             .Include(e => e.Reservations)!
                             .ThenInclude(r => r.Venue)

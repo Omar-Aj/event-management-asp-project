@@ -26,6 +26,19 @@
             <div class="d-flex mb-5 justify-content-between align-items-center" data-aos="fade-up" data-aos-delay="100">
                 <a asp-action="Create" class="btn btn-lg py-1 px-3 custom-btn-create"><i class="bi bi-plus fs-4 p-0 pe-2"></i> Create New Event</a>
                 <div><strong>Average Guests Per Event:</strong> <span>@Model.Average(x => x.Guests!.Count()).ToString("0.##")</span></div>
+                <div class="dropdown d-flex justify-content-end">
+                    <button class="btn custom-btn-add dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false">
+                        Sort by
+                    </button>
+                    <ul class="dropdown-menu">
+                        <li><a asp-action="Index" asp-route-sortOrder="" class="dropdown-item act-custom @(ViewBag.CurrentSort == "" ? "bg-danger text-light" : "")">Title (a - z)</a></li>
+                        <li><a asp-action="Index" asp-route-sortOrder="title_desc" class="dropdown-item act-custom @(ViewBag.CurrentSort == "title_desc" ? "bg-danger text-light" : "")">Title (z - a)</a></li>
+                        <li><a asp-action="Index" asp-route-sortOrder="date_desc" class="dropdown-item act-custom @(ViewBag.CurrentSort == "date_desc" ? "bg-danger text-light" : "")">Date (newest first)</a></li>
+                        <li><a asp-action="Index" asp-route-sortOrder="Date" class="dropdown-item act-custom @(ViewBag.CurrentSort == "Date" ? "bg-danger text-light" : "")">Date (oldest first)</a></li>
+                        <li><a asp-action="Index" asp-route-sortOrder="Duration" class="dropdown-item act-custom @(ViewBag.CurrentSort == "Duration" ? "bg-danger text-light" : "")">Duration (shortest first)</a></li>
+                        <li><a asp-action="Index" asp-route-sortOrder="duration_desc" class="dropdown-item act-custom @(ViewBag.CurrentSort == "duration_desc" ? "bg-danger text-light" : "")">Duration (longest first)</a></li>
+                    </ul>
+                </div>
             </div>
             <div class="row gy-4">
                 @if (Model is null || Model.Count() == 0)
