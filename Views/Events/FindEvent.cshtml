@@ -5,86 +5,96 @@
     ViewData["Title"] = "Find Event";
 }
 
-<h1>@ViewData["Title"]</h1>
-
-<h4>Find By:</h4>
-
-<hr />
-
-<form asp-action="FindEvent">
-    <div>
-        <label asp-for="Title" class="form-label"></label>
-        <input asp-for="Title" class="form-control mb-2" />
-        <span asp-validation-for="Title" class="text-danger"></span>
+<main class="main">
+    <!-- Page Title -->
+    <div class="page-title" data-aos="fade" style="background-image: url(https://images.unsplash.com/photo-1540575467063-178a50c2df87?q=80&w=2070&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D);">
+        <div class="container position-relative">
+            <h1>@ViewData["Title"]</h1>
+            <p></p>
+            <nav class="breadcrumbs">
+                <ol>
+                    <li><a asp-action="Index">Events</a></li>
+                    <li class="current">@ViewData["Title"]</li>
+                </ol>
+            </nav>
+        </div>
     </div>
-    <input type="submit" value="Search" class="btn btn-primary"/>
-</form>
+    <!-- End Page Title -->
+    <!-- Latest Event Section -->
+    <div id="events" class="hotels section">
 
-<div>
-    <table class="table hover">
-        <thead>
-            <tr>
-                <th>
-                    <label asp-for="@Model.Events!.FirstOrDefault()!.Title"></label>
-                </th>
-                <th>
-                    <label asp-for="@Model.Events!.FirstOrDefault()!.DurationInHours"></label>
-                </th>
-                <th>
-                    <label asp-for="@Model.Events!.FirstOrDefault()!.Reservations"></label>
-                </th>
-                <th>
-                    <label asp-for="@Model.Events!.FirstOrDefault()!.Description"></label>
-                </th>
-            </tr>
-        </thead>
-        <tbody>
+        <div class="container section-title" data-aos="fade-up">
+            <h2>Explore</h2>
+            <p>Find your next adventure among our diverse lineup of events.</p>
+        </div>
+
+
+
+        <div class="container" data-aos="fade-up">
+            <form asp-action="FindEvent" class="row">
+                <div class="col-10">
+                    <label asp-for="Title" class="form-label" hidden></label>
+                    <input asp-for="Title" class="form-control mb-2" placeholder="Search By Title" />
+                    <span asp-validation-for="Title" class="text-danger"></span>
+                </div>
+                <div class="col-1">
+                    <input type="submit" value="Search" class="btn btn-danger" />
+                </div>
+                <div class="col-1">
+                    <input type="submit" value="Search" class="btn btn-danger" />
+                </div>
+            </form>
             @if (String.IsNullOrEmpty(Model.Title))
             {
-                <tr>
-                    <th colspan="3">
-                        Search events by title above.
-                    </th>
-                </tr>
+                <div class="container d-flex align-items-center justify-content-center">
+                    <div class="text-center" style="padding-top:50px;">
+                        <i class="bi bi-search text-secondary" style="font-size: 100px;"></i>
+                        <h2 class="text-secondary">Search events by title above.</h2>
+                    </div>
+                </div>
             }
             else if (Model.Events is null || Model.Events!.Count().Equals(0))
             {
-                <tr>
-                    <th colspan="3">
-                        No Events found!
-                    </th>
-                </tr>
+                <div class="container d-flex align-items-center justify-content-center">
+                    <div class="text-center" style="padding-top:50px;">
+                        <i class="bi bi-x-circle text-danger" style="font-size: 100px;"></i>
+                        <h2 class="text-secondary">No Events found!</h2>
+                    </div>
+                </div>
             }
             else
             {
-                @foreach (var e in Model.Events!)
-                {
-                    <tr>
-                        <td>
-                            @e.Title
-                        </td>
-                        <td>
-                            @e.DurationInHours
-                        </td>
-                        <td>
-                            @foreach (var r in e.Reservations!)
-                            {
-                                <span>@(r.Venue!.Name), </span>
-                            }
-                        </td>
-                        <td>
-                            @e.Description
-                        </td>
-                    </tr>
-                }
+                <div class="row gy-4" style="padding-top:20px;">
+                    @foreach (var e in Model.Events!)
+                    {
+                        <div class="col-lg-4 col-md-6" data-aos="fade-up" data-aos-delay="100">
+                            <div class="card h-100">
+                                <div class="card-img">
+                                    <img src="~/assets/img/hotels-1.jpg" alt="" class="img-fluid">
+                                </div>
+                                <div class="d-flex justify-content-between">
+                                    <h3><a asp-action="Details" asp-route-id="@e.EventId" class="stretched-link">@e.Title</a></h3>
+                                    <p>@e.DurationInHours hours</p>
+                                </div>
+                                @if (e.Description.Length <= 100)
+                                {
+                                    <p>@e.Description</p>
+                                }
+                                else
+                                {
+                                    <p>@e.Description.Substring(0, 97)...</p>
+                                }
+                            </div>
+                        </div>
+                    }
+                </div>
             }
-        </tbody>
-    </table>
-</div>
+        </div>
+    </div>
+    <!-- /Latest Event Section -->
+</main>
 
-<div>
-    <a asp-action="Index">Back to List</a>
-</div>
+<partial name="../Shared/PartialViews/_CopyrightFooterSection" />
 
 @section Scripts {
     @{
