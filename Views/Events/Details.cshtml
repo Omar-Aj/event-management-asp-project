@@ -37,13 +37,42 @@
                         <p><strong>Duration:</strong> @Model.DurationInHours hours</p>
                         <p><strong>Description:</strong><br />@Model.Description</p>
                         <p>
-                            <strong>Date & Location:</strong><br />
-                            <!--List of venue will go here with the reservation date-->
-                            <ul>
-                                <li>Venue 1</li>
-                                <li>Venue 2</li>
-                                <li>Venue 3</li>
-                            </ul>
+							<table class="table">
+								<thead>
+									<tr>
+										<th>
+											<label asp-for="@Model.Reservations!.FirstOrDefault()!.Venue!.Name"></label>
+										</th>
+										<th>
+											<label asp-for="@Model.Reservations!.FirstOrDefault()!.Venue!.Location"></label>
+										</th>
+										<th>
+											<label asp-for="@Model.Reservations!.FirstOrDefault()!.ReservationDate"></label>
+										</th>
+									</tr>
+								</thead>
+								<tbody>
+									@if (Model.Reservations is null || Model.Reservations!.Count()! == 0)
+									{
+										<tr>
+											<td colspan="3">
+												No Reservations made
+											</td>
+										</tr>
+									}
+									else
+									{
+										@foreach (var item in Model.Reservations!)
+										{
+											<tr>
+												<td>@item.Venue!.Name</td>
+												<td>@item.Venue.Location</td>
+												<td>@item.ReservationDate.ToString("g")</td>
+											</tr>
+										}
+									}
+								</tbody>
+							</table>
                         </p>
                     </div>
                 </div>

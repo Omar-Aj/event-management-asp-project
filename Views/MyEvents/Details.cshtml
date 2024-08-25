@@ -57,7 +57,7 @@
 								</thead>
 								<!--List of venue will go here with the reservation date-->
 								<tbody>
-									@if (Model.Reservations is null || Model.Reservations.Count()! == 0)
+									@if (Model.Reservations is null || Model.Reservations!.Count()! == 0)
 									{
 										<tr>
 											<td colspan="3">

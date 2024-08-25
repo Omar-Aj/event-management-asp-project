@@ -87,7 +87,10 @@ namespace event_management_asp_project.Controllers
             }
 
             var @event = await _context.tblEvents
-                .FirstOrDefaultAsync(m => m.EventId == id);
+                .Include(e => e.Reservations)!
+				.ThenInclude(r => r.Venue)
+				.Include(g => g.Guests)
+				.FirstOrDefaultAsync(m => m.EventId == id);
             if (@event == null)
             {
                 return NotFound();
