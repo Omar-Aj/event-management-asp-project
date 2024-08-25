@@ -1,0 +1,31 @@
+﻿@model Guest
+
+
+<div class="mb-1">
+    <label asp-for="Name" class="form-label"></label>
+    <input asp-for="Name" class="form-control" disabled />
+</div>
+<div class="mb-1">
+    <label asp-for="Email" class="form-label"></label>
+    <input asp-for="Email" class="form-control" disabled />
+</div>
+<div class="mb-1">
+    <label asp-for="Phone" class="form-label"></label>
+    <input asp-for="Phone" class="form-control" disabled />
+</div>
+<div class="mb-1" hidden>
+    <label asp-for="ConfirmEmail" class="form-label"></label>
+    <input asp-for="ConfirmEmail" class="form-control" disabled />
+</div>
+<div class="mb-1" hidden>
+    <label asp-for="GuestId" class="form-label"></label>
+    <input asp-for="GuestId" class="form-control"  />
+</div>
+<div hidden>
+    <label asp-for="EventId" class="form-label"></label>
+    <input asp-for="EventId" class="form-control" />
+</div>
+<div hidden>
+    <label asp-for="Event" class="form-label"></label>
+    <input asp-for="Event" class="form-control" />
+</div>

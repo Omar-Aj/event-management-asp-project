@@ -1,269 +1,297 @@
 ﻿@model Event
 
 @{
-    ViewData["Title"] = "Manage Event";
+	ViewData["Title"] = "Manage Event";
 }
 <main class="main">
-    <!-- Page Title -->
-    <div class="page-title" data-aos="fade" style="background-image: url(https://images.unsplash.com/photo-1524234599372-a5bd0194758d?q=80&w=2070&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D);">
-        <div class="container position-relative">
-            <h1>@ViewData["Title"]</h1>
-            <p>Check current event info and customize it.</p>
-            <nav class="breadcrumbs">
-                <ol>
-                    <li><a asp-action="Index">My Events</a></li>
-                    <li class="current">@ViewData["Title"]</li>
-                </ol>
-            </nav>
-        </div>
-    </div>
-    <!-- /Page Title -->
-    <!-- Events Section -->
-    <section id="events" class="events section">
-        <div class="container" data-aos="fade-up" data-aos-delay="100">
-            <div class="row">
-                <div class="col-md-6">
-                    <img src="~/assets/img/hotels-1.jpg" alt="Speaker" class="img-fluid">
-                </div>
-                <div class="col-md-6">
-                    <div class="details">
-                        <div class="d-flex justify-content-between">
-                            <h2>@Model.Title</h2>
-                            <a asp-action="Edit" asp-route-id="@Model.EventId" class="btn py-1 px-3 custom-btn-create d-flex align-items-center"><i class="bi bi-pen p-0 pe-2"></i><span>Edit</span></a>
-                        </div>
+	<!-- Page Title -->
+	<div class="page-title" data-aos="fade" style="background-image: url(https://images.unsplash.com/photo-1524234599372-a5bd0194758d?q=80&w=2070&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D);">
+		<div class="container position-relative">
+			<h1>@ViewData["Title"]</h1>
+			<p>Check current event info and customize it.</p>
+			<nav class="breadcrumbs">
+				<ol>
+					<li><a asp-action="Index">My Events</a></li>
+					<li class="current">@ViewData["Title"]</li>
+				</ol>
+			</nav>
+		</div>
+	</div>
+	<!-- /Page Title -->
+	<!-- Events Section -->
+	<section id="events" class="events section">
+		<div class="container" data-aos="fade-up" data-aos-delay="100">
+			<div class="row">
+				<div class="col-md-6">
+					<img src="~/assets/img/hotels-1.jpg" alt="Speaker" class="img-fluid">
+				</div>
+				<div class="col-md-6">
+					<div class="details">
+						<div class="d-flex justify-content-between">
+							<h2>@Model.Title</h2>
+							<a asp-action="Edit" asp-route-id="@Model.EventId" class="btn py-1 px-3 custom-btn-create d-flex align-items-center"><i class="bi bi-pen p-0 pe-2"></i><span>Edit</span></a>
+						</div>
 
-                        <div class="social">
-                            <a href=""><i class="bi bi-twitter"></i></a>
-                            <a href=""><i class="bi bi-facebook"></i></a>
-                            <a href=""><i class="bi bi-instagram"></i></a>
-                            <a href=""><i class="bi bi-linkedin"></i></a>
-                        </div>
-                        <p><strong>Duration:</strong> @Model.DurationInHours hours</p>
-                        <p><strong>Description:</strong><br />@Model.Description</p>
-                        <p>
-                            <table class="table">
-                                <thead>
-                                    <tr>
-                                        <th>
-                                            <label asp-for="@Model.Reservations!.FirstOrDefault()!.Venue!.Name"></label>
-                                        </th>
-                                        <th>
-                                            <label asp-for="@Model.Reservations!.FirstOrDefault()!.Venue!.Location"></label>
-                                        </th>
-                                        <th>
-                                            <label asp-for="@Model.Reservations!.FirstOrDefault()!.ReservationDate"></label>
-                                        </th>
-                                    </tr>
-                                </thead>
-                                <!--List of venue will go here with the reservation date-->
-                                <tbody>
-                                    @if (Model.Reservations is null || Model.Reservations.Count()! == 0)
-                                    {
-                                        <tr>
-                                            <td colspan="3">
-                                                No Reservations made
-                                            </td>
-                                        </tr>
-                                    }
-                                    else
-                                    {
-                                        @foreach (var item in Model.Reservations!)
-                                        {
-                                            <tr>
-                                                <td>@item.Venue!.Name</td>
-                                                <td>@item.Venue.Location</td>
-                                                <td>@item.ReservationDate.ToString("g")</td>
-                                            </tr>
-                                        }
-                                    }
-                                </tbody>
-                            </table>
-                        </p>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </section>
-    <!-- /Events Section -->
-    <!-- Reservation Section -->
-    <section id="contact" class="contact section">
-        <div class="container section-title pb-0" data-aos="fade-up">
-            <h2>Reservations</h2>
-            <p>Checkout current reservations to venues available.</p>
-        </div>
+						<div class="social">
+							<a href=""><i class="bi bi-twitter"></i></a>
+							<a href=""><i class="bi bi-facebook"></i></a>
+							<a href=""><i class="bi bi-instagram"></i></a>
+							<a href=""><i class="bi bi-linkedin"></i></a>
+						</div>
+						<p><strong>Duration:</strong> @Model.DurationInHours hours</p>
+						<p><strong>Description:</strong><br />@Model.Description</p>
+						<p>
+							<table class="table">
+								<thead>
+									<tr>
+										<th>
+											<label asp-for="@Model.Reservations!.FirstOrDefault()!.Venue!.Name"></label>
+										</th>
+										<th>
+											<label asp-for="@Model.Reservations!.FirstOrDefault()!.Venue!.Location"></label>
+										</th>
+										<th>
+											<label asp-for="@Model.Reservations!.FirstOrDefault()!.ReservationDate"></label>
+										</th>
+									</tr>
+								</thead>
+								<!--List of venue will go here with the reservation date-->
+								<tbody>
+									@if (Model.Reservations is null || Model.Reservations.Count()! == 0)
+									{
+										<tr>
+											<td colspan="3">
+												No Reservations made
+											</td>
+										</tr>
+									}
+									else
+									{
+										@foreach (var item in Model.Reservations!)
+										{
+											<tr>
+												<td>@item.Venue!.Name</td>
+												<td>@item.Venue.Location</td>
+												<td>@item.ReservationDate.ToString("g")</td>
+											</tr>
+										}
+									}
+								</tbody>
+							</table>
+						</p>
+					</div>
+				</div>
+			</div>
+		</div>
+	</section>
+	<!-- /Events Section -->
+	<!-- Reservation Section -->
+	<section id="contact" class="contact section">
+		<div class="container section-title pb-0" data-aos="fade-up">
+			<h2>Reservations</h2>
+			<p>Checkout current reservations to venues available.</p>
+		</div>
 
-        <div class="container" data-aos="fade-up" data-aos-delay="100">
-            <div class="row gy-4 mt-1 align-items-start justify-content-center">
-                <!-- Modal -->
-                <div class="modal fade" id="createReservationModal" tabindex="-1" aria-labelledby="createReservationModalLabel" aria-hidden="true">
-                    <div class="modal-dialog">
-                        <div class="modal-content">
-                            <form asp-controller="Reservations" asp-action="Create">
-                                <div class="modal-header">
-                                    <h1 class="modal-title fs-5" id="createReservationModalLabel">Add new reservation</h1>
-                                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-                                </div>
-                                <div class="modal-body">
-                                    <partial name="PartialViews/_ReservationCreateFormFields" model="new Reservation { EventId = Model.EventId }" />
-                                </div>
-                                <div class="modal-footer">
-                                    <button type="button" class="btn custom-btn-close" data-bs-dismiss="modal">Close</button>
-                                    <button type="submit" class="btn custom-btn-add">Add</button>
-                                </div>
-                            </form>
-                        </div>
-                    </div>
-                </div>
+		<div class="container" data-aos="fade-up" data-aos-delay="100">
+			<div class="row gy-4 mt-1 align-items-start justify-content-center">
+				<!-- Modal -->
+				<div class="modal fade" id="createReservationModal" tabindex="-1" aria-labelledby="createReservationModalLabel" aria-hidden="true">
+					<div class="modal-dialog">
+						<div class="modal-content">
+							<form asp-controller="Reservations" asp-action="Create">
+								<div class="modal-header">
+									<h1 class="modal-title fs-5" id="createReservationModalLabel">Add new reservation</h1>
+									<button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+								</div>
+								<div class="modal-body">
+									<partial name="PartialViews/_ReservationCreateFormFields" model="new Reservation { EventId = Model.EventId }" />
+								</div>
+								<div class="modal-footer">
+									<button type="button" class="btn custom-btn-close" data-bs-dismiss="modal">Close</button>
+									<button type="submit" class="btn custom-btn-add">Add</button>
+								</div>
+							</form>
+						</div>
+					</div>
+				</div>
 
-                <!-- Button trigger modal -->
-                <div class="d-flex justify-content-end">
-                    <button type="button" class="btn py-1 px-3 custom-btn-create" data-bs-toggle="modal" data-bs-target="#createReservationModal">
-                        Add new reservation
-                    </button>
-                </div>
+				<!-- Button trigger modal -->
+				<div class="d-flex justify-content-end">
+					<button type="button" class="btn py-1 px-3 custom-btn-create" data-bs-toggle="modal" data-bs-target="#createReservationModal">
+						Add new reservation
+					</button>
+				</div>
 
-                <table class="table">
-                    <thead>
-                        <tr>
-                            <th>
-                                <label asp-for="@Model.Reservations!.FirstOrDefault()!.Venue!.Name"></label>
-                            </th>
-                            <th>
-                                <label asp-for="@Model.Reservations!.FirstOrDefault()!.Venue!.Location"></label>
-                            </th>
-                            <th>
-                                <label asp-for="@Model.Reservations!.FirstOrDefault()!.Venue!.Service"></label>
-                            </th>
-                            <th>
-                                <label asp-for="@Model.Reservations!.FirstOrDefault()!.Venue!.Capacity"></label>
-                            </th>
-                            <th>
-                                <label asp-for="@Model.Reservations!.FirstOrDefault()!.ReservationDate"></label>
-                            </th>
-                        </tr>
-                    </thead>
-                    <tbody>
-                        @if (Model.Reservations is null || Model.Reservations.Count()! == 0)
-                        {
-                            <tr>
-                                <td colspan="5">
-                                    No Reservations made
-                                </td>
-                            </tr>
-                        }
-                        else
-                        {
-                            @foreach (var item in Model.Reservations!)
-                            {
-                                <tr>
-                                    <td>@item.Venue!.Name</td>
-                                    <td>@item.Venue.Location</td>
-                                    <td>@item.Venue.Service</td>
-                                    <td>@item.Venue.Capacity</td>
-                                    <td class="d-flex justify-content-between">
-                                        <span>@item.ReservationDate.ToString("g")</span>
-                                        <!-- Button trigger modal -->
-                                        <button type="button" class="btn btn-danger" data-bs-toggle="modal" data-bs-target="@("#deleteReservationModal" + item.ReservationId)">
-                                            <i class="bi bi-trash text-light"></i>
-                                        </button>
-                                        <!-- Modal -->
-                                        <div class="modal fade" id="@("deleteReservationModal" + item.ReservationId)" tabindex="-1" aria-labelledby="@("deleteReservationModal" + @item.ReservationId)" aria-hidden="true">
-                                            <div class="modal-dialog">
-                                                <div class="modal-content">
-                                                    <form asp-controller="Reservations" asp-action="Delete">
-                                                        <div class="modal-header">
-                                                            <h1 class="modal-title fs-5" id="@(item.ReservationId)">Delete reservation</h1>
-                                                            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-                                                        </div>
-                                                        <div class="modal-body">
-                                                            <p>Are you sure you want to delete this reservation</p>
-                                                            <partial name="PartialViews/_ReservationDeleteFormFields" model="item" />
-                                                        </div>
-                                                        <div class="modal-footer">
-                                                            <button type="button" class="btn custom-btn-close" data-bs-dismiss="modal">Close</button>
-                                                            <button type="submit" class="btn btn-danger">Delete</button>
-                                                        </div>
-                                                    </form>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </td>
-                                </tr>
-                            }
-                        }
-                    </tbody>
-                </table>
-            </div>
-        </div>
-    </section>
-    <!-- /Reservation Section -->
-    <!-- Guest Resgistration Section -->
-    <section id="contact" class="contact section">
-        <div class="container section-title" data-aos="fade-up">
-            <h2>Add Guests</h2>
-            <p>Manually add guests to your event.</p>
-        </div>
+				<table class="table">
+					<thead>
+						<tr>
+							<th>
+								<label asp-for="@Model.Reservations!.FirstOrDefault()!.Venue!.Name"></label>
+							</th>
+							<th>
+								<label asp-for="@Model.Reservations!.FirstOrDefault()!.Venue!.Location"></label>
+							</th>
+							<th>
+								<label asp-for="@Model.Reservations!.FirstOrDefault()!.Venue!.Service"></label>
+							</th>
+							<th>
+								<label asp-for="@Model.Reservations!.FirstOrDefault()!.Venue!.Capacity"></label>
+							</th>
+							<th>
+								<label asp-for="@Model.Reservations!.FirstOrDefault()!.ReservationDate"></label>
+							</th>
+						</tr>
+					</thead>
+					<tbody>
+						@if (Model.Reservations is null || Model.Reservations.Count()! == 0)
+						{
+							<tr>
+								<td colspan="5">
+									No Reservations made
+								</td>
+							</tr>
+						}
+						else
+						{
+							@foreach (var item in Model.Reservations!)
+							{
+								<tr>
+									<td>@item.Venue!.Name</td>
+									<td>@item.Venue.Location</td>
+									<td>@item.Venue.Service</td>
+									<td>@item.Venue.Capacity</td>
+									<td class="d-flex justify-content-between">
+										<span>@item.ReservationDate.ToString("g")</span>
+										<!-- Button trigger modal -->
+										<button type="button" class="btn btn-danger" data-bs-toggle="modal" data-bs-target="@("#deleteReservationModal" + item.ReservationId)">
+											<i class="bi bi-trash text-light"></i>
+										</button>
+										<!-- Modal -->
+										<div class="modal fade" id="@("deleteReservationModal" + item.ReservationId)" tabindex="-1" aria-labelledby="@("deleteReservationModal" + @item.ReservationId)" aria-hidden="true">
+											<div class="modal-dialog">
+												<div class="modal-content">
+													<form asp-controller="Reservations" asp-action="Delete">
+														<div class="modal-header">
+															<h1 class="modal-title fs-5" id="@(item.ReservationId)">Delete reservation</h1>
+															<button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+														</div>
+														<div class="modal-body">
+															<p>Are you sure you want to delete this reservation</p>
+															<partial name="PartialViews/_ReservationDeleteFormFields" model="item" />
+														</div>
+														<div class="modal-footer">
+															<button type="button" class="btn custom-btn-close" data-bs-dismiss="modal">Close</button>
+															<button type="submit" class="btn btn-danger">Delete</button>
+														</div>
+													</form>
+												</div>
+											</div>
+										</div>
+									</td>
+								</tr>
+							}
+						}
+					</tbody>
+				</table>
+			</div>
+		</div>
+	</section>
+	<!-- /Reservation Section -->
+	<!-- Guest Resgistration Section -->
+	<section id="contact" class="contact section">
+		<div class="container section-title" data-aos="fade-up">
+			<h2>Add Guests</h2>
+			<p>Manually add guests to your event.</p>
+		</div>
 
-        <div class="container" data-aos="fade-up" data-aos-delay="100">
-            <div class="row gy-4 mt-1 align-items-start justify-content-center">
-                <table class="table">
-                    <thead>
-                        <tr>
-                            <th><label asp-for="@(Model.Guests.FirstOrDefault().Name)"></label></th>
-                            <th><label asp-for="@(Model.Guests.FirstOrDefault().Email)"></label></th>
-                            <th><label asp-for="@(Model.Guests.FirstOrDefault().Phone)"></label></th>
-                            <th>Delete</th>
-                        </tr>
-                    </thead>
-                    <tbody>
-                        @if (Model.Guests is null || Model.Guests.Count() == 0)
-                        {
-                            <tr>
-                                <td colspan="3">
-                                    No guests invited
-                                </td>
-                            </tr>
-                        }
-                        else
-                        {
-                            @foreach (var item in Model.Guests!)
-                            {
-                                <tr>
-                                    <td>@item.Name</td>
-                                    <td>@item.Email</td>
-                                    <td>@item.Phone</td>
-                                    <td></td>
-                                </tr>
-                            }
-                        }
-                    </tbody>
-                </table>
-            </div>
-            <div class="row gy-4 mt-1 align-items-start justify-content-center">
-                <div class="col-lg-8">
-                    
-                    <!--Connnect form with the action-->
-                    <form asp-action="Create" asp-controller="Guests" class="email-form-custom" data-aos="fade-up" data-aos-delay="400">
-                        <div class="row gy-4">
+		<div class="container" data-aos="fade-up" data-aos-delay="100">
+			<div class="row gy-4 mt-1 align-items-start justify-content-center">
+				<table class="table">
+					<thead>
+						<tr>
+							<th><label asp-for="@(Model.Guests.FirstOrDefault()!.Name)"></label></th>
+							<th><label asp-for="@(Model.Guests.FirstOrDefault()!.Email)"></label></th>
+							<th><label asp-for="@(Model.Guests.FirstOrDefault().Phone)!"></label></th>
+							<th>Delete</th>
+						</tr>
+					</thead>
+					<tbody>
+						@if (Model.Guests is null || Model.Guests.Count() == 0)
+						{
+							<tr>
+								<td colspan="3">
+									No guests invited
+								</td>
+							</tr>
+						}
+						else
+						{
+							@foreach (var item in Model.Guests!)
+							{
+								<tr>
+									<td>@item.Name</td>
+									<td>@item.Email</td>
+									<td>@item.Phone</td>
+									<td class="d-flex justify-content-between">
+@* 										<span>@item.ReservationDate.ToString("g")</span>
+ *@										<!-- Button trigger modal -->
+										<button type="button" class="btn btn-danger" data-bs-toggle="modal" data-bs-target="@("#deleteGuestModal" + item.GuestId)">
+											<i class="bi bi-trash text-light"></i>
+										</button>
+										<!-- Modal -->
+										<div class="modal fade" id="@("deleteGuestModal" + item.GuestId)" tabindex="-1" aria-labelledby="@("deleteGuestModal" + @item.GuestId)" aria-hidden="true">
+											<div class="modal-dialog">
+												<div class="modal-content">
+													<form method="post" asp-controller="Guests" asp-action="Delete">
+														<div class="modal-header">
+															<h1 class="modal-title fs-5" id="@(item.GuestId)">Delete Guest</h1>
+															<button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+														</div>
+														<div class="modal-body">
+															<p>Are you sure you want to delete this guest?</p>
+															<partial name="PartialViews/_DeleteGuestFormFields" model="item" />
+														</div>
+														<div class="modal-footer">
+															<button type="button" class="btn custom-btn-close" data-bs-dismiss="modal">Close</button>
+															<button type="submit" class="btn btn-danger">Delete</button>
+														</div>
+													</form>
+												</div>
+											</div>
+										</div>
+									</td>
 
-                            <partial name="PartialViews\_MyEventsRegisterEvent" model="new Guest {EventId = Model.EventId}">
+								</tr>
+							}
+						}
+					</tbody>
+				</table>
+			</div>
+			<div class="row gy-4 mt-1 align-items-start justify-content-center">
+				<div class="col-lg-8">
+
+					<!--Connnect form with the action-->
+					<form asp-action="Create" asp-controller="Guests" class="email-form-custom" data-aos="fade-up" data-aos-delay="400">
+						<div class="row gy-4">
+
+							<partial name="PartialViews\_MyEventsRegisterEvent" model="new Guest {EventId = Model.EventId}">
 
 
-                            <div class="col-md-12 text-center">
-                                <button type="submit">Add Guest</button>
-                            </div>
+								<div class="col-md-12 text-center">
+									<button type="submit">Add Guest</button>
+								</div>
 
-                        </div>
-                    </form>
-                </div>
-            </div>
-        </div>
-    </section>
-    <!-- /Guest Resgistration Section -->
+						</div>
+					</form>
+				</div>
+			</div>
+		</div>
+	</section>
+	<!-- /Guest Resgistration Section -->
 </main>
 <partial name="../Shared/PartialViews/_CopyrightFooterSection" />
 @section Scripts {
-    @{
-        await Html.RenderPartialAsync("_ValidationScriptsPartial");
-    }
+	@{
+		await Html.RenderPartialAsync("_ValidationScriptsPartial");
+	}
 }
