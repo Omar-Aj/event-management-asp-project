@@ -27,9 +27,21 @@
             <p>Find your next adventure among our diverse lineup of events.</p>
         </div>
 
-        @* <p>
-        <a asp-action="Create">Create New</a>
-        </p> *@
+        <div class="container mb-4">
+            <div class="dropdown">
+                <button class="btn custom-btn-add dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false">
+                    Sort by
+                </button>
+                <ul class="dropdown-menu">
+                    <li><a asp-action="Index" asp-route-sortOrder="" class="dropdown-item @(String.IsNullOrEmpty(ViewBag.CurrentSort) ? "active" : "")">Title (a - z)</a></li>
+                    <li><a asp-action="Index" asp-route-sortOrder="title_desc" class="dropdown-item @(ViewBag.CurrentSort == "title_desc" ? "active" : "")">Title (z - a)</a></li>
+                    <li><a asp-action="Index" asp-route-sortOrder="date_desc" class="dropdown-item @(ViewBag.CurrentSort == "date_desc" ? "active" : "")">Date (newest first)</a></li>
+                    <li><a asp-action="Index" asp-route-sortOrder="Date" class="dropdown-item @(ViewBag.CurrentSort == "Date" ? "active" : "")">Date (oldest first)</a></li>
+                    <li><a asp-action="Index" asp-route-sortOrder="Duration" class="dropdown-item @(ViewBag.CurrentSort == "Duration" ? "active" : "")">Duration (shortest first)</a></li>
+                    <li><a asp-action="Index" asp-route-sortOrder="duration_desc" class="dropdown-item @(ViewBag.CurrentSort == "duration_desc" ? "active" : "")">Duration (longest first)</a></li>
+                </ul>
+            </div>
+        </div>
 
         <div class="container">
             <div class="row gy-4">

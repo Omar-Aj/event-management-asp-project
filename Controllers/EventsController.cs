@@ -43,15 +43,30 @@ namespace event_management_asp_project.Controllers
         // GET: Events
         public async Task<IActionResult> Index(string sortOrder)
         {
-            ViewData["NameSortParm"] = String.IsNullOrEmpty(sortOrder) ? "title_desc" : "";
-            ViewData["DurationSortParm"] = sortOrder == "Duration" ? "duration_desc" : "Duration";
+            ViewData["CurrentSort"] = String.IsNullOrEmpty(sortOrder) ? "" : sortOrder;
 
-            var events = from e in _context.tblEvents select e;
+            var events2 = from e in _context.tblEvents
+                          select e;
+
+            IQueryable<Event> events = _context.tblEvents
+                            .Include(e => e.Reservations)!
+                            .ThenInclude(r => r.Venue)
+                            .Where(e => e.Reservations!.Count() > 0);
 
             switch (sortOrder)
             {
                 case "title_desc":
                     events = events.OrderByDescending(e => e.Title);
+                    break;
+                case "Date":
+                    events = events.OrderBy(e => e.Reservations!
+                        .Min(r => r.ReservationDate)
+                    );
+                    break;
+                case "date_desc":
+                    events = events.OrderByDescending(e => e.Reservations!
+                            .Max(r => r.ReservationDate)
+                        );
                     break;
                 case "Duration":
                     events = events.OrderBy(e => e.DurationInHours);
