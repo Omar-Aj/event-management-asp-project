@@ -209,10 +209,9 @@
 				<table class="table">
 					<thead>
 						<tr>
-							<th><label asp-for="@(Model.Guests.FirstOrDefault()!.Name)"></label></th>
-							<th><label asp-for="@(Model.Guests.FirstOrDefault()!.Email)"></label></th>
-							<th><label asp-for="@(Model.Guests.FirstOrDefault().Phone)!"></label></th>
-							<th>Delete</th>
+							<th><label asp-for="@(Model.Guests!.FirstOrDefault()!.Name)"></label></th>
+							<th><label asp-for="@(Model.Guests!.FirstOrDefault()!.Email)"></label></th>
+							<th><label asp-for="@(Model.Guests!.FirstOrDefault()!.Phone)!"></label></th>
 						</tr>
 					</thead>
 					<tbody>
@@ -231,10 +230,9 @@
 								<tr>
 									<td>@item.Name</td>
 									<td>@item.Email</td>
-									<td>@item.Phone</td>
 									<td class="d-flex justify-content-between">
-@* 										<span>@item.ReservationDate.ToString("g")</span>
- *@										<!-- Button trigger modal -->
+										@item.Phone
+										<!-- Button trigger modal -->
 										<button type="button" class="btn btn-danger" data-bs-toggle="modal" data-bs-target="@("#deleteGuestModal" + item.GuestId)">
 											<i class="bi bi-trash text-light"></i>
 										</button>
@@ -260,7 +258,6 @@
 											</div>
 										</div>
 									</td>
-
 								</tr>
 							}
 						}
