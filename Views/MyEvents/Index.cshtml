@@ -23,12 +23,10 @@
     <div id="events" class="hotels section">
 
         <div class="container">
-            <div class="d-flex mb-5" data-aos="fade-up" data-aos-delay="100">
+            <div class="d-flex mb-5 justify-content-between align-items-center" data-aos="fade-up" data-aos-delay="100">
                 <a asp-action="Create" class="btn btn-lg py-1 px-3 custom-btn-create"><i class="bi bi-plus fs-4 p-0 pe-2"></i> Create New Event</a>
+                <div><strong>Average Guests Per Event:</strong> <span>@Model.Average(x => x.Guests!.Count()).ToString("0.##")</span></div>
             </div>
-            <section>
-                <strong>Avg. Guests Per Event</strong> <p>@Model.Average(x => x.Guests!.Count())</p>
-            </section>
             <div class="row gy-4">
                 @if (Model is null || Model.Count() == 0)
                 {
