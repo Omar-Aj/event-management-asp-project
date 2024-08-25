@@ -139,16 +139,16 @@ namespace event_management_asp_project.Controllers
         // POST: Guests/Delete/5
         [HttpPost, ActionName("Delete")]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> DeleteConfirmed(int id)
+        public async Task<IActionResult> DeleteConfirmed([Bind("GuestId,Name,Email,ConfirmEmail,Phone,EventId")] Guest guest)
         {
-            var guest = await _context.tblGuests.FindAsync(id);
+            int? eventId = guest.EventId;
             if (guest != null)
             {
                 _context.tblGuests.Remove(guest);
             }
 
             await _context.SaveChangesAsync();
-            return RedirectToAction(nameof(Index));
+            return RedirectToAction("Details", "MyEvents", new {id = eventId});
         }
 
         private bool GuestExists(int id)
