@@ -41,6 +41,7 @@ namespace event_management_asp_project.Controllers
             var @event = await _context.tblEvents
                 .Include(e => e.Reservations)!
                 .ThenInclude(r => r.Venue)
+                .Include(g => g.Guests)
                 .FirstOrDefaultAsync(m => m.EventId == id);
 
             if (@event == null)
@@ -52,6 +53,7 @@ namespace event_management_asp_project.Controllers
             {
                 return Unauthorized();
             }
+
 
             ViewData["Venues"] = new SelectList(await _context.tblVenues.ToListAsync(), "VenueId", "Name");
 

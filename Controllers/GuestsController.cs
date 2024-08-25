@@ -46,23 +46,25 @@ namespace event_management_asp_project.Controllers
         // GET: Guests/Create
         public IActionResult Create()
         {
-            return View();
-        }
 
-        // POST: Guests/Create
-        // To protect from overposting attacks, enable the specific properties you want to bind to.
-        // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
-        [HttpPost]
+			return PartialView("_GuestRegisterEvent");
+		}
+
+		// POST: Guests/Create
+		// To protect from overposting attacks, enable the specific properties you want to bind to.
+		// For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
+		[HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Create([Bind("GuestId,Name,Email,ConfirmEmail,Phone")] Guest guest)
+        public async Task<IActionResult> Create([Bind("GuestId,EventId,Name,Email,ConfirmEmail,Phone")] Guest guest)
         {
             if (ModelState.IsValid)
             {
                 _context.Add(guest);
                 await _context.SaveChangesAsync();
-                return RedirectToAction(nameof(Index));
-            }
-            return View(guest);
+				return RedirectToAction("Details", "Events", new { id = guest.EventId });
+			}
+
+			return RedirectToAction("Details", "Events", new {id = guest.EventId});
         }
 
         // GET: Guests/Edit/5
