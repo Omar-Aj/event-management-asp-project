@@ -83,6 +83,7 @@ namespace event_management_asp_project.Controllers
         }
 
         // GET: Events/Details/5
+        [Route("[Controller]/EventDetails/{id:int}")]
         public async Task<IActionResult> Details(int? id)
         {
             if (id == null)
@@ -95,12 +96,18 @@ namespace event_management_asp_project.Controllers
 				.ThenInclude(r => r.Venue)
 				.Include(g => g.Guests)
 				.FirstOrDefaultAsync(m => m.EventId == id);
+
             if (@event == null)
             {
                 return NotFound();
             }
 
-            if (@event.UserId == User.FindFirstValue(ClaimTypes.NameIdentifier))
+			if (@event.Reservations is null || @event.Reservations.Count().Equals(0))
+			{
+				return NotFound();
+			}
+
+			if (@event.UserId == User.FindFirstValue(ClaimTypes.NameIdentifier))
             {
                 return RedirectToAction("Details", "MyEvents", new { id = id });
             }
