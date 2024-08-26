@@ -3,6 +3,7 @@ using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using event_management_asp_project.Data;
 
@@ -11,9 +12,11 @@ using event_management_asp_project.Data;
 namespace event_management_asp_project.Data.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    partial class ApplicationDbContextModelSnapshot : ModelSnapshot
+    [Migration("20240826082515_add_image_url_in_event")]
+    partial class add_image_url_in_event
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -266,7 +269,7 @@ namespace event_management_asp_project.Data.Migrations
 
                     b.HasIndex("UserId");
 
-                    b.ToTable("tblEvents", (string)null);
+                    b.ToTable("tblEvents");
                 });
 
             modelBuilder.Entity("event_management_asp_project.Models.Guest", b =>
@@ -301,7 +304,7 @@ namespace event_management_asp_project.Data.Migrations
 
                     b.HasIndex("EventId");
 
-                    b.ToTable("tblGuests", (string)null);
+                    b.ToTable("tblGuests");
                 });
 
             modelBuilder.Entity("event_management_asp_project.Models.Reservation", b =>
@@ -327,7 +330,7 @@ namespace event_management_asp_project.Data.Migrations
 
                     b.HasIndex("VenueId");
 
-                    b.ToTable("tblReservations", (string)null);
+                    b.ToTable("tblReservations");
                 });
 
             modelBuilder.Entity("event_management_asp_project.Models.Venue", b =>
@@ -355,7 +358,7 @@ namespace event_management_asp_project.Data.Migrations
 
                     b.HasKey("VenueId");
 
-                    b.ToTable("tblVenues", (string)null);
+                    b.ToTable("tblVenues");
 
                     b.HasData(
                         new

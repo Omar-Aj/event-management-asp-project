@@ -18,6 +18,10 @@ namespace event_management_asp_project.Models
         [Range(1, 240)]
         public int DurationInHours { get; set; }
 
+        [Url]
+        [Display(Name = "Image URL")]
+        public string ImageUrl { get; set; } = string.Empty;
+
         [Required]
         [MaxLength(200)]
         [DataType(DataType.MultilineText)]
