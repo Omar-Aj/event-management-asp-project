@@ -21,6 +21,7 @@ namespace event_management_asp_project.Controllers
             _context = context;
         }
 
+        [Route("~/Search")]
         public IActionResult FindEvent()
         {
             return View(new EventViewModel());

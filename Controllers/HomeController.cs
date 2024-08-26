@@ -22,6 +22,7 @@ namespace event_management_asp_project.Controllers
             return View(events);
         }
 
+        [Route("[Action]")]
         public IActionResult About()
         {
             return View();
