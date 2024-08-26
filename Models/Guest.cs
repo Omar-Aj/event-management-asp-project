@@ -20,6 +20,7 @@ namespace event_management_asp_project.Models
 
         [Required]
         [Compare(nameof(Email))]
+        [Display(Name = "Confirm Email")]
         public string ConfirmEmail { get; set; } = string.Empty;
 
         [Required]

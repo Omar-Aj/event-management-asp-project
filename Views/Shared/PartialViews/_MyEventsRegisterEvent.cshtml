@@ -1,34 +1,33 @@
 ﻿@model Guest
 
-<div class="col-md-12">
-	<input asp-for="EventId"  class="form-control" placeholder="Guest Name" required="" hidden>
+<div class="col-md-12" hidden>
+	<input asp-for="EventId"  class="form-control">
 	<span asp-validation-for="EventId" class="text-danger"></span>
-
 </div>
 
 <div class="col-md-12" hidden>
-	<input asp-for="GuestId" class="form-control" placeholder="Guest Name" required="">
+	<input asp-for="GuestId" class="form-control">
 	<span asp-validation-for="GuestId" class="text-danger"></span>
 </div>
 
 <div class="col-md-12">
-	<input asp-for="Name" class="form-control" placeholder="Guest Name" required="">
+	<input asp-for="Name" class="form-control" placeholder="Guest Name">
 	<span asp-validation-for="Name" class="text-danger"></span>
 </div>
 
 <div class="col-md-12">
-	<input asp-for="Email" class="form-control" placeholder="Guest Email" required="">
+	<input asp-for="Email" class="form-control" placeholder="Guest Email">
 	<span asp-validation-for="Email" class="text-danger"></span>
 
 </div>
 
 <div class="col-md-12">
-	<input asp-for="ConfirmEmail" class="form-control" placeholder="Confirm Your Guest's Email'" required="">
+	<input asp-for="ConfirmEmail" class="form-control" placeholder="Confirm Guest's Email">
 	<span asp-validation-for="ConfirmEmail" class="text-danger"></span>
 </div>
 
 <div class="col-md-12">
-	<input asp-for="Phone" class="form-control" type="text" placeholder="Guest Phone" required="">
+	<input asp-for="Phone" class="form-control" type="text" placeholder="Guest Phone">
 	<span asp-validation-for="Phone" class="text-danger"></span>
 </div>
 
