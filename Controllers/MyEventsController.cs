@@ -70,7 +70,7 @@ namespace event_management_asp_project.Controllers
 			ViewData["BackTo"] = id;
 
 			var @event = await _context.tblEvents
-				.Include(e => e.Reservations)!
+				.Include(e => e.Reservations!.OrderByDescending(r => r.ReservationDate))!
 				.ThenInclude(r => r.Venue)
 				.Include(g => g.Guests)
 				.FirstOrDefaultAsync(m => m.EventId == id);
