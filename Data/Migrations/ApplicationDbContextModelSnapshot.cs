@@ -250,6 +250,7 @@ namespace event_management_asp_project.Data.Migrations
                         .HasColumnType("int");
 
                     b.Property<string>("ImageUrl")
+                        .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("Title")
@@ -265,7 +266,7 @@ namespace event_management_asp_project.Data.Migrations
 
                     b.HasIndex("UserId");
 
-                    b.ToTable("tblEvents");
+                    b.ToTable("tblEvents", (string)null);
                 });
 
             modelBuilder.Entity("event_management_asp_project.Models.Guest", b =>
@@ -300,7 +301,7 @@ namespace event_management_asp_project.Data.Migrations
 
                     b.HasIndex("EventId");
 
-                    b.ToTable("tblGuests");
+                    b.ToTable("tblGuests", (string)null);
                 });
 
             modelBuilder.Entity("event_management_asp_project.Models.Reservation", b =>
@@ -326,7 +327,7 @@ namespace event_management_asp_project.Data.Migrations
 
                     b.HasIndex("VenueId");
 
-                    b.ToTable("tblReservations");
+                    b.ToTable("tblReservations", (string)null);
                 });
 
             modelBuilder.Entity("event_management_asp_project.Models.Venue", b =>
@@ -354,7 +355,7 @@ namespace event_management_asp_project.Data.Migrations
 
                     b.HasKey("VenueId");
 
-                    b.ToTable("tblVenues");
+                    b.ToTable("tblVenues", (string)null);
 
                     b.HasData(
                         new

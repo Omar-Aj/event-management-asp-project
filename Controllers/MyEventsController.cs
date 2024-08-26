@@ -86,7 +86,7 @@ namespace event_management_asp_project.Controllers
 			}
 
 
-			ViewData["Venues"] = new SelectList(await _context.tblVenues.ToListAsync(), "VenueId", "Name");
+			ViewData["Venues"] = new SelectList(await _context.tblVenues.ToListAsync(), "VenueId", "Label");
 
 			return View(@event);
 		}

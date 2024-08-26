@@ -23,6 +23,8 @@ namespace event_management_asp_project.Models
         [Range(5, 1000)]
         public int Capacity { get; set; }
 
+        public string Label { get { return $"{Name} - {Service}"; } }
+
         //Navigation
         public IEnumerable<Reservation>? Reservations { get; set; }
 
