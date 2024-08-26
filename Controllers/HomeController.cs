@@ -18,7 +18,13 @@ namespace event_management_asp_project.Controllers
         public async Task<IActionResult> Index()
         {
             //idea: bring first 3 events by popularity
-            var events =await _context.tblEvents.Include(e => e.Reservations).OrderByDescending(e => e.Reservations!.Max(r => r.ReservationDate)).Take(3).ToListAsync();
+            var events = await _context.tblEvents
+                .Include(e => e.Reservations)
+				.Where(e => e.Reservations!.Count() > 0)
+                .OrderByDescending(e => e.Reservations!.Max(r => r.ReservationDate))
+                .Take(3)
+                .ToListAsync();
+
             return View(events);
         }
 

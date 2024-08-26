@@ -37,6 +37,7 @@ namespace event_management_asp_project.Controllers
                 .Include(e => e.Reservations)!
                 .ThenInclude(r => r.Venue)
                 .Where(e => e.Title.ToUpper().Contains(title.ToUpper()))
+				.Where(e => e.Reservations!.Count() > 0)
                 .ToListAsync();
 
             return View(model);
