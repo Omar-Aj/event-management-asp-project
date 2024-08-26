@@ -27,6 +27,7 @@ namespace event_management_asp_project.Controllers
             return View(new EventViewModel());
         }
 
+        [Route("~/Search")]
         [HttpPost]
         public async Task<IActionResult> FindEvent(EventViewModel model)
         {
