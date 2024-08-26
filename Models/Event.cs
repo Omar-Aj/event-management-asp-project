@@ -20,7 +20,7 @@ namespace event_management_asp_project.Models
 
         [Url]
         [Display(Name = "Image URL")]
-        public string ImageUrl { get; set; } = string.Empty;
+        public string? ImageUrl { get; set; } = string.Empty;
 
         [Required]
         [MaxLength(200)]

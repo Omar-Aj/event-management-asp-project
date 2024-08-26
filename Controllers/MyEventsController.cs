@@ -146,7 +146,7 @@ namespace event_management_asp_project.Controllers
 		// For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
 		[HttpPost]
 		[ValidateAntiForgeryToken]
-		public async Task<IActionResult> Edit(int id, [Bind("EventId,Title,DurationInHours,Description,UserId")] Event @event)
+		public async Task<IActionResult> Edit(int id, [Bind("EventId,Title,DurationInHours,ImageUrl,Description,UserId")] Event @event)
 		{
 			if (id != @event.EventId)
 			{
